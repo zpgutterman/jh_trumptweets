@@ -1,0 +1,12 @@
+version: '2'
+services:
+    trumptweet-postgresql:
+        container_name: trumptweet-postgresql
+        image: postgres:9.5.4
+        # volumes:
+        #     - ~/volumes/jhipster/trumptweet/postgresql/:/var/lib/postgresql/
+        environment:
+            - POSTGRES_USER=trumptweet
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432

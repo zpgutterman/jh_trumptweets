@@ -1,0 +1,26 @@
+{
+    "trumptweetApp": {
+        "tweet_log" : {
+            "home": {
+                "title": "Tweet Logs",
+                "createLabel": "Crear nuevo Tweet Log",
+                "createOrEditLabel": "Crear o editar Tweet Log",
+                "search": "Search for Tweet Log"
+            },
+            "created": "Un nuevo Tweet Log ha sido creado con el identificador {{ param }}",
+            "updated": "Un Tweet Log ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Tweet Log ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Tweet Log {{ id }}?"
+            },
+            "detail": {
+                "title": "Tweet Log"
+            },
+            "tweet": "Tweet",
+            "tweet_date": "Tweet Date",
+            "handle": "Handle",
+            "processed": "Processed",
+            "categorize_time": "Categorize Time"
+        }
+    }
+}

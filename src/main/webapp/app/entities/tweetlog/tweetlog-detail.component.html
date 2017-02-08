@@ -1,0 +1,51 @@
+
+<div *ngIf="tweetlog">
+    <h2><span jhiTranslate="trumptweetApp.tweetlog.detail.title">Tweetlog</span> {{tweetlog.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="trumptweetApp.tweetlog.tweet">Tweet</span></dt>
+        <dd>
+            <span>{{tweetlog.tweet}}</span>
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.tweetlog.tweet_date">Tweet Date</span></dt>
+        <dd>
+            <span>{{tweetlog.tweet_date | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.tweetlog.handle">Handle</span></dt>
+        <dd>
+            <span>{{tweetlog.handle}}</span>
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.tweetlog.processed">Processed</span></dt>
+        <dd>
+            <span>{{tweetlog.processed}}</span>
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.tweetlog.categorize_time">Categorize Time</span></dt>
+        <dd>
+            <span>{{tweetlog.categorize_time | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.tweetlog.category">Category</span></dt>
+        <dd>
+            <span *ngFor="let category of tweetlog.categories; let last = last">
+                <a [routerLink]="['/category', category?.id ]">{{category.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.tweetlog.categorize_user">Categorize User</span></dt>
+        <dd>
+            {{tweetlog.categorize_user?.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'tweetlog/'+ tweetlog.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

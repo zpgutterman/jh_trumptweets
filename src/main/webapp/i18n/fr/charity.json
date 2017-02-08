@@ -1,0 +1,24 @@
+{
+    "trumptweetApp": {
+        "charity" : {
+            "home": {
+                "title": "Charities",
+                "createLabel": "Créer un nouveau Charity",
+                "createOrEditLabel": "Créer ou éditer un Charity",
+                "search": "Recherche pour Charity"
+            },
+            "created": "Un nouveau Charity a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Charity avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Charity avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Charity {{ id }} ?"
+            },
+            "detail": {
+                "title": "Charity"
+            },
+            "name": "Name",
+            "website": "Website",
+            "category": "Category"
+        }
+    }
+}

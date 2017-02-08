@@ -1,0 +1,22 @@
+{
+    "trumptweetApp": {
+        "testentity" : {
+            "home": {
+                "title": "Testentities",
+                "createLabel": "Testentity を追加",
+                "createOrEditLabel": "Testentityを追加または編集",
+                "search": "Search for Testentity"
+            },
+            "created": "A new Testentity is created with identifier {{ param }}",
+            "updated": "A Testentity is updated with identifier {{ param }}",
+            "deleted": "A Testentity is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Testentity {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "Testentity"
+            },
+            "name": "Name"
+        }
+    }
+}

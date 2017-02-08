@@ -1,0 +1,16 @@
+version: '2'
+services:
+    trumptweet-app:
+        image: trumptweet
+        external_links:
+            - trumptweet-postgresql:postgresql
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/trumptweet
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    trumptweet-postgresql:
+        extends:
+            file: postgresql.yml
+            service: trumptweet-postgresql

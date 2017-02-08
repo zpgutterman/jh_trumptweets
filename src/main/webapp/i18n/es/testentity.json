@@ -1,0 +1,22 @@
+{
+    "trumptweetApp": {
+        "testentity" : {
+            "home": {
+                "title": "Testentities",
+                "createLabel": "Crear nuevo Testentity",
+                "createOrEditLabel": "Crear o editar Testentity",
+                "search": "Search for Testentity"
+            },
+            "created": "Un nuevo Testentity ha sido creado con el identificador {{ param }}",
+            "updated": "Un Testentity ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Testentity ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Testentity {{ id }}?"
+            },
+            "detail": {
+                "title": "Testentity"
+            },
+            "name": "Name"
+        }
+    }
+}

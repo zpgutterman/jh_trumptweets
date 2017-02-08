@@ -1,0 +1,65 @@
+<div>
+    <h2><span jhiTranslate="trumptweetApp.charity.home.title">Charities</span>
+        <button class="btn btn-primary float-xs-right create-charity" [routerLink]="['/', { outlets: { popup: ['charity-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="trumptweetApp.charity.home.createLabel">
+            Create new Charity
+            </span>
+        </button></h2>
+    <jhi-alert></jhi-alert>
+
+    <div class="container-fluid">
+        <div class="row">
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="charities">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="trumptweetApp.charity.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="website"><span jhiTranslate="trumptweetApp.charity.website">Website</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="category.name"><span jhiTranslate="trumptweetApp.charity.category">Category</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let charity of charities ;trackBy: trackId">
+                <td><a [routerLink]="['../charity', charity.id ]">{{charity.id}}</a></td>
+                <td>{{charity.name}}</td>
+                <td>{{charity.website}}</td>
+                <td>
+                    <div *ngIf="charity.category">
+                        <a [routerLink]="['../category', charity.category?.id ]" >{{charity.category?.name}}</a>
+                    </div>
+                </td>
+                <td class="text-xs-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../charity', charity.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'charity/'+ charity.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'charity/'+ charity.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+{
+    "trumptweetApp": {
+        "tweetlog" : {
+            "home": {
+                "title": "Tweetlogs",
+                "createLabel": "Tweetlog を追加",
+                "createOrEditLabel": "Tweetlogを追加または編集",
+                "search": "Search for Tweetlog"
+            },
+            "created": "A new Tweetlog is created with identifier {{ param }}",
+            "updated": "A Tweetlog is updated with identifier {{ param }}",
+            "deleted": "A Tweetlog is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Tweetlog {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "Tweetlog"
+            },
+            "tweet": "Tweet",
+            "tweet_date": "Tweet Date",
+            "handle": "Handle",
+            "processed": "Processed",
+            "categorize_time": "Categorize Time",
+            "category": "Category",
+            "categorize_user": "Categorize User"
+        }
+    }
+}

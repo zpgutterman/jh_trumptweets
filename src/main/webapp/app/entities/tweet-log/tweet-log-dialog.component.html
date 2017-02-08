@@ -1,0 +1,89 @@
+
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+        <h4 class="modal-title" id="myTweet_logLabel" jhiTranslate="trumptweetApp.tweet_log.home.createOrEditLabel">Create or edit a Tweet Log</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!tweet_log.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="tweet_log.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="trumptweetApp.tweet_log.tweet" for="field_tweet">Tweet</label>
+            <input type="text" class="form-control" name="tweet" id="field_tweet"
+                [(ngModel)]="tweet_log.tweet"
+            required maxlength="600" />
+            <div [hidden]="!(editForm.controls.tweet?.dirty && editForm.controls.tweet?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.tweet?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.tweet?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 600 }">
+                   This field cannot be longer than 600 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="trumptweetApp.tweet_log.tweet_date" for="field_tweet_date">Tweet Date</label>
+            <div class="input-group">
+                <input id="field_tweet_date" type="datetime-local" class="form-control" name="tweet_date" [(ngModel)]="tweet_log.tweet_date"
+                required  />
+            </div>
+            <div [hidden]="!(editForm.controls.tweet_date?.dirty && editForm.controls.tweet_date?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.tweet_date?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.tweet_date?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="trumptweetApp.tweet_log.handle" for="field_handle">Handle</label>
+            <input type="text" class="form-control" name="handle" id="field_handle"
+                [(ngModel)]="tweet_log.handle"
+            required minlength="2" />
+            <div [hidden]="!(editForm.controls.handle?.dirty && editForm.controls.handle?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.handle?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.handle?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 2 }">
+                   This field is required to be at least 2 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="trumptweetApp.tweet_log.processed" for="field_processed">Processed</label>
+            <input type="checkbox" class="form-control" name="processed" id="field_processed"
+                [(ngModel)]="tweet_log.processed"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="trumptweetApp.tweet_log.categorize_time" for="field_categorize_time">Categorize Time</label>
+            <div class="input-group">
+                <input id="field_categorize_time" type="datetime-local" class="form-control" name="categorize_time" [(ngModel)]="tweet_log.categorize_time"
+                  />
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
