@@ -1,10 +1,12 @@
 package com.zpg.trumptweet.web.rest.vm;
 
-import com.zpg.trumptweet.service.dto.UserDTO;
-import javax.validation.constraints.Size;
-
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.Set;
+
+import javax.validation.constraints.Size;
+
+import com.zpg.trumptweet.service.dto.UserDTO;
 
 /**
  * View Model extending the UserDTO, which is meant to be used in the user management UI.
@@ -25,10 +27,10 @@ public class ManagedUserVM extends UserDTO {
     public ManagedUserVM(Long id, String login, String password, String firstName, String lastName,
                          String email, boolean activated, String imageUrl, String langKey,
                          String createdBy, ZonedDateTime createdDate, String lastModifiedBy, ZonedDateTime lastModifiedDate,
-                        Set<String> authorities) {
+                        Set<String> authorities, BigDecimal monthlyLimit, BigDecimal tweetLimit) {
 
         super(id, login, firstName, lastName, email, activated,  imageUrl, langKey,
-            createdBy, createdDate, lastModifiedBy, lastModifiedDate,  authorities);
+            createdBy, createdDate, lastModifiedBy, lastModifiedDate,  authorities, monthlyLimit, tweetLimit);
 
         this.password = password;
     }

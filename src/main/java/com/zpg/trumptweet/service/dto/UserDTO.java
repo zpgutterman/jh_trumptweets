@@ -8,6 +8,8 @@ import com.zpg.trumptweet.domain.User;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.*;
+
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -50,6 +52,10 @@ public class UserDTO {
     private ZonedDateTime lastModifiedDate;
 
     private Set<String> authorities;
+    
+    private BigDecimal monthlyLimit;
+    
+    private BigDecimal tweetLimit;
 
     public UserDTO() {
         // Empty constructor needed for MapStruct.
@@ -60,13 +66,13 @@ public class UserDTO {
             user.getEmail(), user.getActivated(), user.getImageUrl(), user.getLangKey(),
             user.getCreatedBy(), user.getCreatedDate(), user.getLastModifiedBy(), user.getLastModifiedDate(),
             user.getAuthorities().stream().map(Authority::getName)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toSet()), user.getMonthlyLimit(), user.getTweetLimit());
     }
 
     public UserDTO(Long id, String login, String firstName, String lastName,
         String email, boolean activated, String imageUrl, String langKey,
         String createdBy, ZonedDateTime createdDate, String lastModifiedBy, ZonedDateTime lastModifiedDate,
-        Set<String> authorities) {
+        Set<String> authorities, BigDecimal monthlyLimit, BigDecimal tweetLimit) {
 
         this.id = id;
         this.login = login;
@@ -81,6 +87,8 @@ public class UserDTO {
         this.lastModifiedBy = lastModifiedBy;
         this.lastModifiedDate = lastModifiedDate;
         this.authorities = authorities;
+        this.monthlyLimit = monthlyLimit;
+        this.tweetLimit = tweetLimit;
     }
 
     public Long getId() {
@@ -146,6 +154,14 @@ public class UserDTO {
     public Set<String> getAuthorities() {
         return authorities;
     }
+    
+    public BigDecimal getMonthlyLimit() {
+    	return monthlyLimit;
+    }
+    
+    public BigDecimal getTweetLimit() {
+    	return tweetLimit;
+    }
 
     @Override
     public String toString() {
@@ -162,6 +178,8 @@ public class UserDTO {
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
+            ", monthlyLimit=" + monthlyLimit +
+            ", tweetLimit=" + tweetLimit +
             "}";
     }
 }

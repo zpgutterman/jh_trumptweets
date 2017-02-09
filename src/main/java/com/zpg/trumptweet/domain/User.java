@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -81,7 +82,15 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "reset_date")
     private ZonedDateTime resetDate = null;
-
+    
+    @Size(max = 10)
+    @Column(name = "monthly_limit")
+    private BigDecimal monthlyLimit;
+    
+    @Size(max = 10)
+    @Column(name = "tweet_limit")
+    private BigDecimal tweetLimit;
+    
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -209,6 +218,23 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setPersistentTokens(Set<PersistentToken> persistentTokens) {
         this.persistentTokens = persistentTokens;
     }
+    
+    public BigDecimal getMonthlyLimit() {
+        return monthlyLimit;
+    }
+
+    public void setMonthlyLimit(BigDecimal monthlyLimit) {
+        this.monthlyLimit = monthlyLimit;
+    }
+    
+    public BigDecimal getTweetLimit() {
+        return tweetLimit;
+    }
+
+    public void setTweetLimit(BigDecimal tweetLimit) {
+        this.tweetLimit = tweetLimit;
+    }
+    
 
     @Override
     public boolean equals(Object o) {
@@ -244,6 +270,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
+             ", monthlyLimit='" + monthlyLimit + '\'' +
+            ", tweetLimit='" + tweetLimit + '\'' +
             "}";
     }
 }
