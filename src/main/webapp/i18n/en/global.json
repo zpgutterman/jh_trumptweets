@@ -10,7 +10,6 @@
                 "category": "Category",
                 "charity": "Charity",
                 "tweetlog": "Tweetlog",
-                "testentity": "Testentity",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
