@@ -12,6 +12,8 @@ export class User {
     public lastModifiedBy?: string;
     public lastModifiedDate?: Date;
     public password?: string;
+    public monthlyLimit?: any;
+    public tweetLimit?: any;
     constructor(
         id?: any,
         login?: string,
@@ -26,6 +28,8 @@ export class User {
         lastModifiedBy?: string,
         lastModifiedDate?: Date,
         password?: string
+        monthlyLimit?: number;
+        tweetLimit?: number;
     ) {
         this.id = id ? id : null;
         this.login = login ? login : null;
@@ -40,5 +44,8 @@ export class User {
         this.lastModifiedBy = lastModifiedBy ? lastModifiedBy : null;
         this.lastModifiedDate = lastModifiedDate ? lastModifiedDate : null;
         this.password = password ? password : null;
+        this.monthlyLimit = monthlyLimit ? monthlyLimit : null;
+        this.tweetLimit = tweetLimit ? tweetLimit : null;
+
     }
 }
