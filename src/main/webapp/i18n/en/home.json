@@ -1,7 +1,7 @@
 {
     "home": {
-        "title": "Welcome, Java Hipster!",
-        "subtitle": "This is your homepage",
+        "title": "Trump Tweets",
+        "subtitle": "Put your money where his mouth is.",
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
         },
