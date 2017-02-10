@@ -1,23 +1,37 @@
 package com.zpg.trumptweet.domain;
 
-import com.zpg.trumptweet.config.Constants;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-import java.time.ZonedDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.zpg.trumptweet.config.Constants;
 
 /**
  * A user.
@@ -83,11 +97,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date")
     private ZonedDateTime resetDate = null;
     
-    @Size(max = 10)
+    @DecimalMin("0.01")
+    @DecimalMax("100000.00")
     @Column(name = "monthly_limit")
     private BigDecimal monthlyLimit;
     
-    @Size(max = 10)
+    @DecimalMin("0.01")
+    @DecimalMax("1000.00")
     @Column(name = "tweet_limit")
     private BigDecimal tweetLimit;
     
