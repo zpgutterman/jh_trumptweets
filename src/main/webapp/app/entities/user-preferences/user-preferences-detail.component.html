@@ -1,0 +1,31 @@
+
+<div *ngIf="user_preferences">
+    <h2><span jhiTranslate="trumptweetApp.user_preferences.detail.title">User Preferences</span> {{user_preferences.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="trumptweetApp.user_preferences.user">User</span></dt>
+        <dd>
+            {{user_preferences.user?.login}}
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.user_preferences.excluded_categories">Excluded Categories</span></dt>
+        <dd>
+            <span *ngFor="let excluded_categories of user_preferences.excluded_categories; let last = last">
+                <a [routerLink]="['/category', excluded_categories?.id ]">{{excluded_categories.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'user-preferences/'+ user_preferences.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

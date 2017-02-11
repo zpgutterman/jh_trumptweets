@@ -41,6 +41,11 @@ public class Category implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Tweetlog> tweetlogs = new HashSet<>();
 
+    @ManyToMany(mappedBy = "excluded_categories")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<User_preferences> user_exclusions = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -110,6 +115,31 @@ public class Category implements Serializable {
 
     public void setTweetlogs(Set<Tweetlog> tweetlogs) {
         this.tweetlogs = tweetlogs;
+    }
+
+    public Set<User_preferences> getUser_exclusions() {
+        return user_exclusions;
+    }
+
+    public Category user_exclusions(Set<User_preferences> user_preferences) {
+        this.user_exclusions = user_preferences;
+        return this;
+    }
+
+    public Category addUser_exclusions(User_preferences user_preferences) {
+        this.user_exclusions.add(user_preferences);
+        user_preferences.getExcluded_categories().add(this);
+        return this;
+    }
+
+    public Category removeUser_exclusions(User_preferences user_preferences) {
+        this.user_exclusions.remove(user_preferences);
+        user_preferences.getExcluded_categories().remove(this);
+        return this;
+    }
+
+    public void setUser_exclusions(Set<User_preferences> user_preferences) {
+        this.user_exclusions = user_preferences;
     }
 
     @Override

@@ -10,6 +10,7 @@
                 "category": "Category",
                 "charity": "Charity",
                 "tweetlog": "Tweetlog",
+                "userPreferences": "User Preferences",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -18,7 +18,8 @@
             },
             "name": "Name",
             "charity": "Charity",
-            "tweetlog": "Tweetlog"
+            "tweetlog": "Tweetlog",
+            "user_exclusions": "User Exclusions"
         }
     }
 }

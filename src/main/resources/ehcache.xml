@@ -42,5 +42,11 @@
 
     <cache alias="com.zpg.trumptweet.domain.Testentity" uses-template="simple"/>
 
+    <cache alias="com.zpg.trumptweet.domain.User_preferences" uses-template="simple"/>
+
+    <cache alias="com.zpg.trumptweet.domain.User_preferences.excluded_categories" uses-template="simple"/>
+
+    <cache alias="com.zpg.trumptweet.domain.Category.user_exclusions" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>

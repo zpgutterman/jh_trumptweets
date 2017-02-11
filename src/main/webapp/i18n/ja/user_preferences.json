@@ -1,0 +1,23 @@
+{
+    "trumptweetApp": {
+        "user_preferences" : {
+            "home": {
+                "title": "User_preferences",
+                "createLabel": "User Preferences を追加",
+                "createOrEditLabel": "User Preferencesを追加または編集",
+                "search": "Search for User Preferences"
+            },
+            "created": "A new User Preferences is created with identifier {{ param }}",
+            "updated": "A User Preferences is updated with identifier {{ param }}",
+            "deleted": "A User Preferences is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "User Preferences {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "User Preferences"
+            },
+            "user": "User",
+            "excluded_categories": "Excluded Categories"
+        }
+    }
+}

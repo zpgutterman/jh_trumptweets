@@ -10,6 +10,7 @@ import { CategoryPopupService } from './category-popup.service';
 import { CategoryService } from './category.service';
 import { Charity, CharityService } from '../charity';
 import { Tweetlog, TweetlogService } from '../tweetlog';
+import { User_preferences, User_preferencesService } from '../user-preferences';
 @Component({
     selector: 'jhi-category-dialog',
     templateUrl: './category-dialog.component.html'
@@ -23,6 +24,8 @@ export class CategoryDialogComponent implements OnInit {
     charities: Charity[];
 
     tweetlogs: Tweetlog[];
+
+    user_preferences: User_preferences[];
     constructor(
         public activeModal: NgbActiveModal,
         private jhiLanguageService: JhiLanguageService,
@@ -30,6 +33,7 @@ export class CategoryDialogComponent implements OnInit {
         private categoryService: CategoryService,
         private charityService: CharityService,
         private tweetlogService: TweetlogService,
+        private user_preferencesService: User_preferencesService,
         private eventManager: EventManager
     ) {
         this.jhiLanguageService.setLocations(['category']);
@@ -42,6 +46,8 @@ export class CategoryDialogComponent implements OnInit {
             (res: Response) => { this.charities = res.json(); }, (res: Response) => this.onError(res.json()));
         this.tweetlogService.query().subscribe(
             (res: Response) => { this.tweetlogs = res.json(); }, (res: Response) => this.onError(res.json()));
+        this.user_preferencesService.query().subscribe(
+            (res: Response) => { this.user_preferences = res.json(); }, (res: Response) => this.onError(res.json()));
     }
     clear () {
         this.activeModal.dismiss('cancel');
@@ -78,6 +84,10 @@ export class CategoryDialogComponent implements OnInit {
     }
 
     trackTweetlogById(index: number, item: Tweetlog) {
+        return item.id;
+    }
+
+    trackUser_preferencesById(index: number, item: User_preferences) {
         return item.id;
     }
 

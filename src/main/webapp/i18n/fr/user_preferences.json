@@ -1,0 +1,23 @@
+{
+    "trumptweetApp": {
+        "user_preferences" : {
+            "home": {
+                "title": "User_preferences",
+                "createLabel": "Créer un nouveau User Preferences",
+                "createOrEditLabel": "Créer ou éditer un User Preferences",
+                "search": "Recherche pour User Preferences"
+            },
+            "created": "Un nouveau User Preferences a été créé avec l'identifiant {{ param }}",
+            "updated": "Le User Preferences avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le User Preferences avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le User Preferences {{ id }} ?"
+            },
+            "detail": {
+                "title": "User Preferences"
+            },
+            "user": "User",
+            "excluded_categories": "Excluded Categories"
+        }
+    }
+}
