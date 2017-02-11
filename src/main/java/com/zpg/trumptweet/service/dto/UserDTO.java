@@ -56,6 +56,8 @@ public class UserDTO {
     private BigDecimal monthlyLimit;
     
     private BigDecimal tweetLimit;
+    
+    private BigDecimal transferThreshold;
 
     public UserDTO() {
         // Empty constructor needed for MapStruct.
@@ -66,13 +68,13 @@ public class UserDTO {
             user.getEmail(), user.getActivated(), user.getImageUrl(), user.getLangKey(),
             user.getCreatedBy(), user.getCreatedDate(), user.getLastModifiedBy(), user.getLastModifiedDate(),
             user.getAuthorities().stream().map(Authority::getName)
-                .collect(Collectors.toSet()), user.getMonthlyLimit(), user.getTweetLimit());
+                .collect(Collectors.toSet()), user.getMonthlyLimit(), user.getTweetLimit(), user.getTransferThreshold());
     }
 
     public UserDTO(Long id, String login, String firstName, String lastName,
         String email, boolean activated, String imageUrl, String langKey,
         String createdBy, ZonedDateTime createdDate, String lastModifiedBy, ZonedDateTime lastModifiedDate,
-        Set<String> authorities, BigDecimal monthlyLimit, BigDecimal tweetLimit) {
+        Set<String> authorities, BigDecimal monthlyLimit, BigDecimal tweetLimit, BigDecimal transferThreshold) {
 
         this.id = id;
         this.login = login;
@@ -89,6 +91,7 @@ public class UserDTO {
         this.authorities = authorities;
         this.monthlyLimit = monthlyLimit;
         this.tweetLimit = tweetLimit;
+        this.transferThreshold = transferThreshold;
     }
 
     public Long getId() {
@@ -162,6 +165,10 @@ public class UserDTO {
     public BigDecimal getTweetLimit() {
     	return tweetLimit;
     }
+    
+    public BigDecimal getTransferThreshold() {
+    	return transferThreshold;
+    }
 
     @Override
     public String toString() {
@@ -180,6 +187,7 @@ public class UserDTO {
             ", authorities=" + authorities +
             ", monthlyLimit=" + monthlyLimit +
             ", tweetLimit=" + tweetLimit +
+            ", transferThreshold=" + transferThreshold +
             "}";
     }
 }

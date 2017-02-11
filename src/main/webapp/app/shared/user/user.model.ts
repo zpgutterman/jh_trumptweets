@@ -14,6 +14,7 @@ export class User {
     public password?: string;
     public monthlyLimit?: number;
     public tweetLimit?: number;
+    public transferThreshold?: number;
     constructor(
         id?: any,
         login?: string,
@@ -29,7 +30,8 @@ export class User {
         lastModifiedDate?: Date,
         password?: string,
         monthlyLimit?: number,
-        tweetLimit?: number
+        tweetLimit?: number,
+        transferThreshold?: number
     ) {
         this.id = id ? id : null;
         this.login = login ? login : null;
@@ -46,6 +48,7 @@ export class User {
         this.password = password ? password : null;
         this.monthlyLimit = monthlyLimit ? monthlyLimit : null;
         this.tweetLimit = tweetLimit ? tweetLimit : null;
+        this.transferThreshold = transferThreshold ? transferThreshold : null;
 
     }
 }

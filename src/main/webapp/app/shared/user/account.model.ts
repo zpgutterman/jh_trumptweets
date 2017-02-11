@@ -9,6 +9,7 @@ export class Account {
         public login: string,
         public imageUrl: string,
         public monthlyLimit: number,
-        public tweetLimit: number
+        public tweetLimit: number,
+        public transferThreshold: number
     ) { }
 }

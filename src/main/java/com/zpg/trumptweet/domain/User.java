@@ -97,7 +97,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date")
     private ZonedDateTime resetDate = null;
     
-    @DecimalMin("0.01")
+    @DecimalMin("1.00")
     @DecimalMax("100000.00")
     @Column(name = "monthly_limit")
     private BigDecimal monthlyLimit;
@@ -106,6 +106,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @DecimalMax("1000.00")
     @Column(name = "tweet_limit")
     private BigDecimal tweetLimit;
+    
+    @DecimalMin("0.50")
+    @DecimalMax("1000.00")
+    @Column(name = "transfer_threshold")
+    private BigDecimal transferThreshold;
     
     @JsonIgnore
     @ManyToMany
@@ -251,6 +256,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.tweetLimit = tweetLimit;
     }
     
+    public BigDecimal getTransferThreshold() {
+        return transferThreshold;
+    }
+
+    public void setTransferThreshold(BigDecimal transferThreshold) {
+        this.transferThreshold = transferThreshold;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -288,6 +300,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", activationKey='" + activationKey + '\'' +
              ", monthlyLimit='" + monthlyLimit + '\'' +
             ", tweetLimit='" + tweetLimit + '\'' +
+            ", transferThreshold='" + transferThreshold + '\'' +
             "}";
     }
 }

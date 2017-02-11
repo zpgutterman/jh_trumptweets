@@ -3,14 +3,12 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-	<changeSet author="zpgutterman" id="createsequence-0">
-		<createSequence
-			sequenceName="tweetlog_id_seq" />
+	<changeSet author="zpgutterman (generated)" id="1486847523065-3">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<sequenceExists sequenceName="tweetlog_id_seq" />
+			</not>
+		</preConditions>
+		<createSequence sequenceName="tweetlog_id_seq" />
 	</changeSet>
-
-	<changeSet author="zpgutterman (generated)" id="1486666843450-1">
-		<addAutoIncrement columnDataType="int" columnName="id"
-			incrementBy="1" startWith="1" tableName="tweetlog" />
-	</changeSet>
-
 </databaseChangeLog>

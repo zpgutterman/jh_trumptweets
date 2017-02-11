@@ -172,6 +172,7 @@ public class UserService {
                 user.setLangKey(userDTO.getLangKey());
                 user.setTweetLimit(userDTO.getTweetLimit());
                 user.setMonthlyLimit(userDTO.getMonthlyLimit());
+                user.setTransferThreshold(userDTO.getTransferThreshold());
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
                 userDTO.getAuthorities().stream()
