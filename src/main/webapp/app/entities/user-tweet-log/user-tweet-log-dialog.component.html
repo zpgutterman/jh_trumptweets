@@ -1,0 +1,47 @@
+
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+        <h4 class="modal-title" id="myUser_tweet_logLabel" jhiTranslate="trumptweetApp.user_tweet_log.home.createOrEditLabel">Create or edit a User Tweet Log</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!user_tweet_log.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="user_tweet_log.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="trumptweetApp.user_tweet_log.charge" for="field_charge">Charge</label>
+            <input type="number" class="form-control" name="charge" id="field_charge"
+                [(ngModel)]="user_tweet_log.charge"
+             />
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="trumptweetApp.user_tweet_log.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="user_tweet_log.user" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === user_tweet_log.user?.id ? user_tweet_log.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="trumptweetApp.user_tweet_log.tweet" for="field_tweet">Tweet</label>
+            <select class="form-control" id="field_tweet" name="tweet" [(ngModel)]="user_tweet_log.tweet" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="tweetlogOption.id === user_tweet_log.tweet?.id ? user_tweet_log.tweet : tweetlogOption" *ngFor="let tweetlogOption of tweetlogs; trackBy: trackTweetlogById">{{tweetlogOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

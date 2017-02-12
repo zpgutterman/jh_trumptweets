@@ -12,6 +12,7 @@
                 "tweetlog": "Tweetlog",
                 "userPreferences": "User Preferences",
                 "userBalances": "User Balances",
+                "userTweetLog": "User Tweet Log",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

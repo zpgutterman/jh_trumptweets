@@ -1,0 +1,24 @@
+{
+    "trumptweetApp": {
+        "user_tweet_log" : {
+            "home": {
+                "title": "User Tweet Logs",
+                "createLabel": "Criar novo User Tweet Log",
+                "createOrEditLabel": "Criar ou editar User Tweet Log",
+                "search": "Pesquisar por User Tweet Log"
+            },
+            "created": "Um novo User Tweet Log é criado com o identificador {{ param }}",
+            "updated": "Um User Tweet Log é atualizado com o identificador {{ param }}",
+            "deleted": "Um User Tweet Log é deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir User Tweet Log {{ id }}?"
+            },
+            "detail": {
+                "title": "User Tweet Log"
+            },
+            "charge": "Charge",
+            "user": "User",
+            "tweet": "Tweet"
+        }
+    }
+}
