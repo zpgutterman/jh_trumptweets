@@ -1,0 +1,35 @@
+
+<div *ngIf="user_balances">
+    <h2><span jhiTranslate="trumptweetApp.user_balances.detail.title">User Balances</span> {{user_balances.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="trumptweetApp.user_balances.balance">Balance</span></dt>
+        <dd>
+            <span>{{user_balances.balance}}</span>
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.user_balances.user">User</span></dt>
+        <dd>
+            {{user_balances.user?.login}}
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.user_balances.category">Category</span></dt>
+        <dd>
+            <div *ngIf="user_balances.category">
+                <a [routerLink]="['category', user_balances.category?.id]">{{user_balances.category?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'user-balances/'+ user_balances.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

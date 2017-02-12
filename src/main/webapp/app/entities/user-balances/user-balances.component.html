@@ -1,0 +1,67 @@
+<div>
+    <h2><span jhiTranslate="trumptweetApp.user_balances.home.title">User Balances</span>
+        <button class="btn btn-primary float-xs-right create-user-balances" [routerLink]="['/', { outlets: { popup: ['user-balances-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="trumptweetApp.user_balances.home.createLabel">
+            Create new User Balances
+            </span>
+        </button></h2>
+    <jhi-alert></jhi-alert>
+
+    <div class="container-fluid">
+        <div class="row">
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="user_balances">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="balance"><span jhiTranslate="trumptweetApp.user_balances.balance">Balance</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="user.login"><span jhiTranslate="trumptweetApp.user_balances.user">User</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="category.name"><span jhiTranslate="trumptweetApp.user_balances.category">Category</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let user_balances of user_balances ;trackBy: trackId">
+                <td><a [routerLink]="['../user-balances', user_balances.id ]">{{user_balances.id}}</a></td>
+                <td>{{user_balances.balance}}</td>
+                <td>
+                    {{user_balances.user?.login}}
+                </td>
+                <td>
+                    <div *ngIf="user_balances.category">
+                        <a [routerLink]="['../category', user_balances.category?.id ]" >{{user_balances.category?.name}}</a>
+                    </div>
+                </td>
+                <td class="text-xs-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../user-balances', user_balances.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'user-balances/'+ user_balances.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'user-balances/'+ user_balances.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

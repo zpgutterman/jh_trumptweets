@@ -11,6 +11,7 @@
                 "charity": "Charity",
                 "tweetlog": "Tweetlog",
                 "userPreferences": "User Preferences",
+                "userBalances": "User Balances",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

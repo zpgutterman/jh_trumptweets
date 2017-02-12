@@ -1,0 +1,24 @@
+{
+    "trumptweetApp": {
+        "user_balances" : {
+            "home": {
+                "title": "User_balances",
+                "createLabel": "User Balances を追加",
+                "createOrEditLabel": "User Balancesを追加または編集",
+                "search": "Search for User Balances"
+            },
+            "created": "A new User Balances is created with identifier {{ param }}",
+            "updated": "A User Balances is updated with identifier {{ param }}",
+            "deleted": "A User Balances is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "User Balances {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "User Balances"
+            },
+            "balance": "Balance",
+            "user": "User",
+            "category": "Category"
+        }
+    }
+}

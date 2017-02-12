@@ -1,0 +1,24 @@
+{
+    "trumptweetApp": {
+        "user_balances" : {
+            "home": {
+                "title": "User Balances",
+                "createLabel": "Create a new User Balances",
+                "createOrEditLabel": "Create or edit a User Balances",
+                "search": "Search for User Balances"
+            },
+            "created": "A new User Balances is created with identifier {{ param }}",
+            "updated": "A User Balances is updated with identifier {{ param }}",
+            "deleted": "A User Balances is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete User Balances {{ id }}?"
+            },
+            "detail": {
+                "title": "User Balances"
+            },
+            "balance": "Balance",
+            "user": "User",
+            "category": "Category"
+        }
+    }
+}

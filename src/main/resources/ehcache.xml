@@ -48,5 +48,7 @@
 
     <cache alias="com.zpg.trumptweet.domain.Category.user_exclusions" uses-template="simple"/>
 
+    <cache alias="com.zpg.trumptweet.domain.User_balances" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>
