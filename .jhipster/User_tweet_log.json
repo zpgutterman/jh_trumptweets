@@ -1,0 +1,30 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "user_tweet_log"
+        },
+        {
+            "relationshipName": "tweet",
+            "otherEntityName": "tweetlog",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "charge",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20170212175931",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "user_tweet_log",
+    "pagination": "infinite-scroll"
+}

@@ -1,0 +1,30 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "user_balances"
+        },
+        {
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "balance",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20170212170224",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "user_balances",
+    "pagination": "infinite-scroll"
+}

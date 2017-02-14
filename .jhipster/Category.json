@@ -1,0 +1,43 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "charity",
+            "otherEntityName": "charity",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "category"
+        },
+        {
+            "relationshipName": "tweetlog",
+            "otherEntityName": "tweetlog",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "category"
+        },
+        {
+            "relationshipName": "user_exclusions",
+            "otherEntityName": "user_preferences",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "excluded_categories"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "3",
+            "fieldValidateRulesMaxlength": "30"
+        }
+    ],
+    "changelogDate": "20170207235802",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "category",
+    "pagination": "infinite-scroll"
+}

@@ -1,0 +1,27 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "user_preferences"
+        },
+        {
+            "relationshipName": "excluded_categories",
+            "otherEntityName": "category",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "user_exclusion"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20170211222306",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "user_preferences",
+    "pagination": "infinite-scroll"
+}

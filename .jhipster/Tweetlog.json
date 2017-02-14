@@ -1,0 +1,65 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "tweetlog"
+        },
+        {
+            "relationshipName": "categorize_user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "tweetlog"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "tweet",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "2",
+            "fieldValidateRulesMaxlength": "600"
+        },
+        {
+            "fieldName": "tweet_date",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "handle",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "2",
+            "fieldValidateRulesMaxlength": "50"
+        },
+        {
+            "fieldName": "processed",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "categorize_time",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20170208021253",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "tweetlog",
+    "pagination": "infinite-scroll"
+}
