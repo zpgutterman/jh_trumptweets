@@ -6,6 +6,9 @@
         </addColumn>
     </changeSet>
     <changeSet author="zpgutterman (generated)" id="1486847523064-2">
+    <preConditions onFail="MARK_RAN">
+				<sequenceExists sequenceName="tweetlog_id_seq" />
+		</preConditions>
         <dropSequence sequenceName="tweetlog_id_seq"/>
     </changeSet>
 </databaseChangeLog>
