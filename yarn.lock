@@ -4876,6 +4876,10 @@ ng-jhipster@0.1.6:
   dependencies:
     ng2-translate "4.2.0"
 
+ng2-currency-mask@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/ng2-currency-mask/-/ng2-currency-mask-1.3.0.tgz#aaecda96523a23d17cbbdb337e0c5d034baa7721"
+
 ng2-translate@4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/ng2-translate/-/ng2-translate-4.2.0.tgz#83bc8feca329b5fc56a636e36073241c6280c659"

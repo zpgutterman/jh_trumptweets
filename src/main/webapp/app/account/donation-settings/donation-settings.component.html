@@ -19,7 +19,7 @@
             <form name="form" role="form" (ngSubmit)="save()" #donationSettings="ngForm" *ngIf="user">
               <div class="form-group">
                   <label>Monthly Limit</label>
-                  <input type="text" class="form-control" name="monthlyLimit" #monthlyLimitInput="ngModel"
+                  <input currencyMask type="text" class="form-control" name="monthlyLimit" #monthlyLimitInput="ngModel"
                          [(ngModel)]="user.monthlyLimit">
 
                   <div *ngIf="monthlyLimitInput.dirty && monthlyLimitInput.invalid">
@@ -32,7 +32,7 @@
               </div>
               <div class="form-group">
                   <label>Tweet Limit</label>
-                  <input type="text" class="form-control" name="tweetLimit" #tweetLimitInput="ngModel"
+                  <input currencyMask type="text" class="form-control" name="tweetLimit" #tweetLimitInput="ngModel"
                          [(ngModel)]="user.tweetLimit">
 
                   <div *ngIf="tweetLimitInput.dirty && tweetLimitInput.invalid">
@@ -45,7 +45,7 @@
               </div>
               <div class="form-group">
                   <label>Transfer Threshold</label>
-                  <input type="text" class="form-control" name="transferThreshold" #transferThresholdInput="ngModel"
+                  <input currencyMask type="text" class="form-control" name="transferThreshold" #transferThresholdInput="ngModel"
                          [(ngModel)]="user.transferThreshold">
 
                   <div *ngIf="transferThresholdInput.dirty && transferThresholdInput.invalid">
