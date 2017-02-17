@@ -84,6 +84,28 @@ public class AccountResource {
                 })
         );
     }
+    
+    /**
+     * POST  /setDonations : register the user.
+     *
+     * @param managedUserVM the managed user View Model
+     * @return the ResponseEntity with status 201 (Created) if the user is registered or 400 (Bad Request) if the login or e-mail is already in use
+     */
+    @PostMapping("/account/donation")
+    @Timed
+    public ResponseEntity<String> saveAccountDonation(@Valid @RequestBody UserDTO userDTO) {
+        Optional<User> existingUser = userRepository.findOneByEmail(userDTO.getEmail());
+        if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(userDTO.getLogin()))) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("user-management", "emailexists", "Email already in use")).body(null);
+        }
+        return userRepository
+            .findOneByLogin(SecurityUtils.getCurrentUserLogin())
+            .map(u -> {
+                userService.updateUser(userDTO.getTweetLimit(), userDTO.getMonthlyLimit(), userDTO.getTransferThreshold());
+                return new ResponseEntity<String>(HttpStatus.OK);
+            })
+            .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+    }
 
     /**
      * GET  /activate : activate the registered user.

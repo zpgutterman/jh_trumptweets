@@ -10,7 +10,8 @@ import {
     registerRoute,
     sessionsRoute,
     socialRegisterRoute,
-    settingsRoute
+    settingsRoute,
+    donateRoute
 } from './';
 
 let ACCOUNT_ROUTES = [
@@ -21,7 +22,8 @@ let ACCOUNT_ROUTES = [
    registerRoute,
    sessionsRoute,
    socialRegisterRoute,
-   settingsRoute
+   settingsRoute,
+   donateRoute
 ];
 
 export const accountState: Routes = [{

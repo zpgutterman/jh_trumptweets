@@ -46,7 +46,7 @@
                             <span jhiTranslate="global.menu.entities.tweetlog">Tweetlog</span>
                         </a>
                     </li>
-                    
+
                     <li uiSrefActive="active">
                         <a class="dropdown-item" routerLink="user-preferences" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
@@ -154,6 +154,12 @@
                         <a class="dropdown-item" routerLink="settings" routerLinkActive="active" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-wrench" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.account.settings">Settings</span>
+                        </a>
+                    </li>
+                    <li *ngSwitchCase="true">
+                        <a class="dropdown-item" routerLink="donation-settings" routerLinkActive="active" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-wrench" aria-hidden="true"></i>
+                            <span >Donation Settings</span>
                         </a>
                     </li>
                     <li *ngSwitchCase="true">

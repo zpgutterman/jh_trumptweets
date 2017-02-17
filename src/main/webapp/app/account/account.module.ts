@@ -7,6 +7,7 @@ import {
     Register,
     Activate,
     Password,
+    DonationSettings,
     PasswordResetInit,
     PasswordResetFinish,
     SessionsService,
@@ -19,6 +20,7 @@ import {
     PasswordResetFinishComponent,
     SettingsComponent,
     SocialRegisterComponent,
+    DonationSettingsComponent,
     accountState
 } from './';
 
@@ -31,6 +33,7 @@ import {
         SocialRegisterComponent,
         ActivateComponent,
         RegisterComponent,
+        DonationSettingsComponent,
         PasswordComponent,
         PasswordStrengthBarComponent,
         PasswordResetInitComponent,
@@ -43,6 +46,7 @@ import {
         Register,
         Activate,
         Password,
+        DonationSettings,
         PasswordResetInit,
         PasswordResetFinish
     ],

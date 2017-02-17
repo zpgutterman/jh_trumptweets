@@ -1,14 +1,12 @@
 package com.zpg.trumptweet.service;
 
-import com.zpg.trumptweet.domain.Authority;
-import com.zpg.trumptweet.domain.User;
-import com.zpg.trumptweet.repository.AuthorityRepository;
-import com.zpg.trumptweet.repository.PersistentTokenRepository;
-import com.zpg.trumptweet.repository.UserRepository;
-import com.zpg.trumptweet.security.AuthoritiesConstants;
-import com.zpg.trumptweet.security.SecurityUtils;
-import com.zpg.trumptweet.service.util.RandomUtil;
-import com.zpg.trumptweet.service.dto.UserDTO;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +17,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.util.*;
+import com.zpg.trumptweet.domain.Authority;
+import com.zpg.trumptweet.domain.User;
+import com.zpg.trumptweet.repository.AuthorityRepository;
+import com.zpg.trumptweet.repository.PersistentTokenRepository;
+import com.zpg.trumptweet.repository.UserRepository;
+import com.zpg.trumptweet.security.AuthoritiesConstants;
+import com.zpg.trumptweet.security.SecurityUtils;
+import com.zpg.trumptweet.service.dto.UserDTO;
+import com.zpg.trumptweet.service.util.RandomUtil;
 
 /**
  * Service class for managing users.
@@ -153,6 +157,18 @@ public class UserService {
             user.setEmail(email);
             user.setLangKey(langKey);
             log.debug("Changed Information for User: {}", user);
+        });
+    }
+    
+    /**
+     * Update donation information (monthly, threshold, tweet) for the current user.
+     */
+    public void updateUser(BigDecimal tweetLimit, BigDecimal monthlyLimit, BigDecimal transferThreshold) {
+        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
+        	user.setTweetLimit(tweetLimit);
+            user.setMonthlyLimit(monthlyLimit);
+            user.setTransferThreshold(transferThreshold);
+            log.debug("Changed Donation Information for User: {}", user);
         });
     }
 
