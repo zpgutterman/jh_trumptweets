@@ -3,8 +3,8 @@
         <span class="hipster img-fluid img-rounded"></span>
     </div>
     <div class="col-md-9">
-        <h1 class="display-4" jhiTranslate="home.title">Test Title</h1>
-        <p class="lead" jhiTranslate="home.subtitle">test subtitle</p>
+        <h1 class="display-4">Resistcents</h1>
+        <p class="lead" jhiTranslate="home.subtitle">Put your money where his mouth is.</p>
 
         <div [ngSwitch]="isAuthenticated()">
             <div class="alert alert-success" *ngSwitchCase="true">
@@ -21,10 +21,21 @@
                 <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>
                 <a class="alert-link" routerLink="register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
             </div>
-        </div>
+        <div *ngSwitchCase="true">
 
-        <p jhiTranslate="home.question">
-            If you have any questions on JHipster:
+          <span>Donation Information:</span>
+          <br />
+          <span><a href="/#/donation-settings">Edit</a></span>
+          <ul>
+            <li><span *ngIf="account">Monthly Limit: {{account.monthlyLimit | currency:'USD':true:'1.2-2'}}</span></li>
+            <li><span *ngIf="account">Per Tweet Limit: {{account.tweetLimit | currency:'USD':true:'1.2-2'}}</span></li>
+            <li><span *ngIf="account">Transfer Threshold: {{account.transferThreshold | currency:'USD':true:'1.2-2'}}</span></li>
+          </ul>
+        </div>
+      </div>
+
+        <p>
+            Links:
         </p>
 
         <ul>
