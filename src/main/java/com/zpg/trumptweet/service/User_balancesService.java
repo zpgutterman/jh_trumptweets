@@ -50,6 +50,19 @@ public class User_balancesService {
         Page<User_balances> result = user_balancesRepository.findAll(pageable);
         return result;
     }
+    
+    /**
+     *  Get all the user_balances by user ID.
+     *  
+     *  @param pageable the pagination information
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public List<User_balances> findByCurrentUser() {
+    	List<User_balances> result = user_balancesRepository.findByUserIsCurrentUser();
+    	log.debug("****USER BALANCES" + result.get(0).toString());
+        return result;
+    }
 
     /**
      *  Get one user_balances by id.

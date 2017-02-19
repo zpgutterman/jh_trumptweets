@@ -7,6 +7,7 @@ import { User_balances } from './user-balances.model';
 export class User_balancesService {
 
     private resourceUrl = 'api/user-balances';
+    private userbalancesUrl = 'api/ub-user/';
 
     constructor(private http: Http) { }
 
@@ -26,6 +27,13 @@ export class User_balancesService {
 
     find(id: number): Observable<User_balances> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
+            return res.json();
+        });
+    }
+
+    findByUser(): Observable<User_balances[]> {
+        return this.http.get(`${this.userbalancesUrl}`).map((res: Response) => {
+          console.log("response" + res.json());
             return res.json();
         });
     }
