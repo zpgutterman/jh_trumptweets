@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { Ng2Webstorage } from 'ng2-webstorage';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { TrumptweetSharedModule, UserRouteAccessService } from './shared';
 import { TrumptweetAdminModule } from './admin/admin.module';
@@ -29,6 +30,7 @@ import {
 @NgModule({
     imports: [
         BrowserModule,
+        NgbModule.forRoot(),
         LayoutRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
         TrumptweetSharedModule,

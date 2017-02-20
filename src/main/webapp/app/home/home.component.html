@@ -33,10 +33,15 @@
           </ul>
         </div>
         <div *ngSwitchCase="true">
+
           <span>Balances:</span>
           <ul>
             <li *ngFor="let ub of user_balances">
               {{ub.category.name}} : {{ub.balance | currency:'USD':true:'1.2-2'}}
+              <br />
+              <span *ngIf="account">
+              <ngb-progressbar value="{{ub.balance}}" max="{{account.transferThreshold}}"></ngb-progressbar>
+            </span>
             </li>
           </ul>
         </div>

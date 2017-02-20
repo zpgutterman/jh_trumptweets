@@ -37,7 +37,7 @@ export class DonationSettingsComponent implements OnInit {
       ngOnInit () {
           this.principal.identity().then((account) => {
               this.user = account;
-              console.log("account login is " + this.user.monthlyLimit)
+              console.log("account login is " + this.user.monthlyLimit);
           });
 
       }
