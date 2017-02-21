@@ -3,7 +3,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { EventManager, JhiLanguageService } from 'ng-jhipster';
 import { User_balances, User_balancesService } from '../entities/user-balances';
 import { Account, LoginModalService, Principal } from '../shared';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
     selector: 'jhi-home',
     templateUrl: './home.component.html',
@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
         this.principal.identity().then((account) => {
             this.account = account;
             this.loadBalances();
-
         });
         this.registerAuthenticationSuccess();
     }
