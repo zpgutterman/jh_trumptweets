@@ -25,7 +25,7 @@
 
           <span>Donation Information:</span>
           <br />
-          <span><a href="/#/donation-settings">Edit</a></span>
+          <span><a routerLink="donation-settings">Edit</a></span>
           <ul>
             <li><span *ngIf="account">Monthly Limit: {{account.monthlyLimit | currency:'USD':true:'1.2-2'}}</span></li>
             <li><span *ngIf="account">Per Tweet Limit: {{account.tweetLimit | currency:'USD':true:'1.2-2'}}</span></li>

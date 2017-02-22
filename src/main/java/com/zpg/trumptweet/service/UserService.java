@@ -93,7 +93,7 @@ public class UserService {
     }
 
     public User createUser(String login, String password, String firstName, String lastName, String email,
-        String imageUrl, String langKey) {
+        String imageUrl, String langKey, BigDecimal monthlyLimit, BigDecimal tweetLimit, BigDecimal transferThreshold) {
 
         User newUser = new User();
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
@@ -107,6 +107,9 @@ public class UserService {
         newUser.setEmail(email);
         newUser.setImageUrl(imageUrl);
         newUser.setLangKey(langKey);
+        newUser.setTweetLimit(tweetLimit);
+        newUser.setMonthlyLimit(monthlyLimit);
+        newUser.setTransferThreshold(transferThreshold);
         // new user is not active
         newUser.setActivated(false);
         // new user gets registration key
@@ -137,6 +140,9 @@ public class UserService {
             );
             user.setAuthorities(authorities);
         }
+        user.setTransferThreshold(userDTO.getTransferThreshold());
+        user.setMonthlyLimit(userDTO.getMonthlyLimit());
+        user.setTweetLimit(userDTO.getTweetLimit());
         String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
         user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
