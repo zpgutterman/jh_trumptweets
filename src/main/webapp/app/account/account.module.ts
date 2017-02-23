@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CurrencyMaskModule } from "ng2-currency-mask";
+import { CurrencyMaskModule } from "../shared/ng2-currency-mask";
 
 import { TrumptweetSharedModule } from '../shared';
 

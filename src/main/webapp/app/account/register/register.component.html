@@ -111,7 +111,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="tweetLimit">Tweet Limit</label>
-                    <input currencyMask type="text" class="form-control" [(ngModel)]="registerAccount.tweetLimit" id="tweetLimit" name="tweetLimit" #tweetLimitInput="ngModel" placeholder="$0.00">
+                    <input currencyMask type="text" class="form-control" placeholder="$0.25" [(ngModel)]="registerAccount.tweetLimit" id="tweetLimit" name="tweetLimit" #tweetLimitInput="ngModel" required minlength="1" maxlength="10">
                             <div *ngIf="tweetLimitInput.dirty && tweetLimitInput.invalid">
                                 <small class="form-text text-danger"
                                    *ngIf="tweetLimitInput.errors.maxlength" jhiTranslate="entity.validation.maxlength"
@@ -122,7 +122,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="monthlyLimit">Monthly Limit</label>
-                    <input currencyMask type="text" class="form-control" [(ngModel)]="registerAccount.monthlyLimit" id="monthlyLimit" name="monthlyLimit" #monthlyLimitInput="ngModel" placeholder="$0.00"
+                    <input currencyMask type="text" class="form-control" placeholder="$10.00" [(ngModel)]="registerAccount.monthlyLimit" id="monthlyLimit" name="monthlyLimit" #monthlyLimitInput="ngModel"
                             required minlength="1" maxlength="10">
                             <div *ngIf="monthlyLimitInput.dirty && monthlyLimitInput.invalid">
                                 <small class="form-text text-danger"
@@ -133,8 +133,8 @@
                             </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="monthlyLimit">Transfer Threshold</label>
-                    <input currencyMask type="text" class="form-control" [(ngModel)]="registerAccount.transferThreshold" id="transferThreshold" name="transferThreshold" #transferThresholdInput="ngModel" placeholder="$0.00"
+                    <label class="form-control-label" for="transferThreshold">Transfer Threshold</label>
+                    <input currencyMask type="text" [options]="{ allowNegative: 'false' }" class="form-control" placeholder="$2.50" [(ngModel)]="registerAccount.transferThreshold" id="transferThreshold" name="transferThreshold" #transferThresholdInput="ngModel"
                             required minlength="1" maxlength="10">
                             <div *ngIf="transferThresholdInput.dirty && transferThresholdInput.invalid">
                                 <small class="form-text text-danger"

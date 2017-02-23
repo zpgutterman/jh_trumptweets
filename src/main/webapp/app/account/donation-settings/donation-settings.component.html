@@ -19,7 +19,7 @@
             <form name="form" role="form" (ngSubmit)="save()" #donationSettings="ngForm" *ngIf="user">
               <div class="form-group">
                   <label>Monthly Limit</label>
-                  <input currencyMask type="text" class="form-control" name="monthlyLimit" #monthlyLimitInput="ngModel"
+                  <input currencyMask [options]="{ allowNegative: 'false' }" type="text" class="form-control" name="monthlyLimit" #monthlyLimitInput="ngModel"
                          [(ngModel)]="user.monthlyLimit">
 
                   <div *ngIf="monthlyLimitInput.dirty && monthlyLimitInput.invalid">
