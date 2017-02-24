@@ -12,7 +12,11 @@ import { LoginModalService } from '../../shared';
 export class RegisterComponent implements OnInit, AfterViewInit {
 
     confirmPassword: string;
+    public isCollapsedTL = true;
+    public isCollapsedML = true;
+    public isCollapsedTT = true;
     doNotMatch: string;
+    invalidDonation: string;
     error: string;
     errorEmailExists: string;
     errorUserExists: string;
@@ -39,12 +43,24 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#login'), 'focus', []);
     }
 
+    validateDonationRules() {
+
+
+    }
+
+
     register() {
+
         if (this.registerAccount.password !== this.confirmPassword) {
             this.doNotMatch = 'ERROR';
-        } else {
+        } else if (parseInt(this.registerAccount.tweetLimit,10) > parseInt(this.registerAccount.monthlyLimit,10)) {
+          console.log("tweet limit is higher than monthly limit")
+            this.invalidDonation = 'ERROR';
+        }
+        else {
             this.doNotMatch = null;
             this.error = null;
+            this.invalidDonation = null;
             this.errorUserExists = null;
             this.errorEmailExists = null;
             this.languageService.getCurrent().then(key => {
