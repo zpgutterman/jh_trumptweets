@@ -117,19 +117,19 @@
                     <label class="form-control-label" for="tweetLimitRadio">Tweet Limit</label>
                     <div [(ngModel)]="registerAccount.tweetLimit" ngbRadioGroup name="tweetLimitRadio">
                         <label class="btn btn-primary">
-                          <input type="radio" [value]=".10"> $0.10
+                          <input type="radio" [value]=".10" (click)="tweetLimitBlur()"> $0.10
                         </label>
                         <label class="btn btn-primary">
-                          <input type="radio" value=".25"> $0.25
+                          <input type="radio" value=".25" (click)="tweetLimitBlur()"> $0.25
                         </label>
                         <label class="btn btn-primary">
-                          <input type="radio" [value]=".50"> $0.50
+                          <input type="radio" [value]=".50" (click)="tweetLimitBlur()"> $0.50
                         </label>
                         <label class="btn btn-primary">
-                          <input type="radio" [value]="1.00"> $1.00
+                          <input type="radio" [value]="1.00" (click)="tweetLimitBlur()"> $1.00
                         </label>
                       <label class="btn btn-primary">
-                        <input type="radio" [value]="2.50"> $2.50
+                        <input type="radio" [value]="2.50" (click)="tweetLimitBlur()"> $2.50
                       </label>
                       <button type="button" class="btn btn-primary" (click)="isCollapsedTL = !isCollapsedTL"
                       [attr.aria-expanded]="!isCollapsedTL" aria-controls="tweetLimitCustom">
@@ -138,7 +138,7 @@
                     </div>
 
                     <div id="tweetLimitCustom" [ngbCollapse]="isCollapsedTL">
-                    <input currencyMask type="text" class="form-control" placeholder="Custom Tweet Limit" [(ngModel)]="registerAccount.tweetLimit" id="tweetLimit" name="tweetLimit" #tweetLimitInput="ngModel" required minlength="1" maxlength="10">
+                    <input currencyMask type="text" class="form-control" placeholder="Custom Tweet Limit" (blur)="tweetLimitBlur()" [(ngModel)]="registerAccount.tweetLimit" id="tweetLimit" name="tweetLimit" #tweetLimitInput="ngModel" required minlength="1" maxlength="10">
                             <div *ngIf="tweetLimitInput.dirty && tweetLimitInput.invalid">
                                 <small class="form-text text-danger"
                                    *ngIf="tweetLimitInput.errors.maxlength" jhiTranslate="entity.validation.maxlength"
@@ -146,35 +146,41 @@
                                     This field cannot be longer than 10 characters.
                                 </small>
                             </div>
+                            <div class="alert alert-danger" *ngIf="tweetLow">
+                                The tweet limit must be $0.10 or greater.
+                            </div>
+                            <div class="alert alert-danger" *ngIf="tweetHigh">
+                                The tweet limit must be under $1000.00.
+                            </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="monthlyLimitRadio">Monthly Limit</label>
-                    <div [(ngModel)]="registerAccount.monthlyLimit" ngbRadioGroup name="monthlyLimitRadio">
+                    <div [(ngModel)]="registerAccount.monthlyLimit" ngbRadioGroup name="monthlyLimitRadio" [disabled]="MLDisabled">
                         <label class="btn btn-primary">
-                          <input type="radio" [value]="2.50"> $2.50
+                          <input type="radio" [value]="2.50" (click)="monthlyLimitBlur()"> $2.50
                         </label>
                         <label class="btn btn-primary">
-                          <input type="radio" value="5.00"> $5.00
+                          <input type="radio" value="5.00" (click)="monthlyLimitBlur()"> $5.00
                         </label>
                         <label class="btn btn-primary">
-                          <input type="radio" [value]="10"> $10.00
+                          <input type="radio" [value]="10" (click)="monthlyLimitBlur()"> $10.00
                         </label>
                         <label class="btn btn-primary">
-                          <input type="radio" [value]="25"> $25.00
+                          <input type="radio" [value]="25" (click)="monthlyLimitBlur()"> $25.00
                         </label>
                       <label class="btn btn-primary">
-                        <input type="radio" [value]="50"> $50.00
+                        <input type="radio" [value]="50" (click)="monthlyLimitBlur()"> $50.00
                       </label>
-                      <button type="button" class="btn btn-primary" (click)="isCollapsedML = !isCollapsedML"
+                      <button type="button" [disabled]="MLDisabled" class="btn btn-primary" (click)="isCollapsedML = !isCollapsedML"
                       [attr.aria-expanded]="!isCollapsedML" aria-controls="monthlyLimitCustom">
                       Custom Amount
                     </button>
                     </div>
 
                     <div id="monthlyLimitCustom" [ngbCollapse]="isCollapsedML">
-                    <input currencyMask type="text" class="form-control" placeholder="Custom Monthly Limit" [(ngModel)]="registerAccount.monthlyLimit" id="monthlyLimit" name="monthlyLimit" #monthlyLimitInput="ngModel"
+                    <input currencyMask type="text" [disabled]="MLDisabled" class="form-control" (blur)="monthlyLimitBlur()" placeholder="Custom Monthly Limit" [(ngModel)]="registerAccount.monthlyLimit" id="monthlyLimit" name="monthlyLimit" #monthlyLimitInput="ngModel"
                             required minlength="1" maxlength="10">
                             <div *ngIf="monthlyLimitInput.dirty && monthlyLimitInput.invalid">
                                 <small class="form-text text-danger"
@@ -183,35 +189,44 @@
                                     This field cannot be longer than 10 characters.
                                 </small>
                             </div>
+                            <div class="alert alert-danger" *ngIf="monthlyLow">
+                                The monthly limit must be $2.50 or greater.
+                            </div>
+                            <div class="alert alert-danger" *ngIf="monthlyHigh">
+                                The monthly limit must be under $1000.00.
+                            </div>
+                            <div class="alert alert-danger" *ngIf="monthlyLowTweet">
+                                The monthly limit must be greater than the tweet limit.
+                            </div>
                       </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="transferThresholdRadio">Transfer Threshold</label>
 
-                    <div [(ngModel)]="registerAccount.transferThreshold" ngbRadioGroup name="transferThresholdRadio">
+                    <div [(ngModel)]="registerAccount.transferThreshold" ngbRadioGroup name="transferThresholdRadio" [disabled]="TTDisabled">
                         <label class="btn btn-primary">
-                          <input type="radio" [value]="2"> $2.00
+                          <input type="radio" [value]="2" (click)="transferThresholdBlur()"> $2.00
                         </label>
                         <label class="btn btn-primary">
-                          <input type="radio" value="5"> $5.00
+                          <input type="radio" value="5" (click)="transferThresholdBlur()"> $5.00
                         </label>
                         <label class="btn btn-primary">
-                          <input type="radio" [value]="10"> $10.00
+                          <input type="radio" [value]="10" (click)="transferThresholdBlur()"> $10.00
                         </label>
                         <label class="btn btn-primary">
-                          <input type="radio" [value]="20"> $20.00
+                          <input type="radio" [value]="20" (click)="transferThresholdBlur()"> $20.00
                         </label>
                       <label class="btn btn-primary">
-                        <input type="radio" [value]="50"> $50.00
+                        <input type="radio" [value]="50" (click)="transferThresholdBlur()"> $50.00
                       </label>
-                      <button type="button" class="btn btn-primary" (click)="isCollapsedTT = !isCollapsedTT"
+                      <button type="button" [disabled]="TTDisabled" class="btn btn-primary" (click)="isCollapsedTT = !isCollapsedTT"
                       [attr.aria-expanded]="!isCollapsedTT" aria-controls="transferThresholdCustom">
                       Custom Amount
                     </button>
                     </div>
 
                     <div id="transferThresholdCustom" [ngbCollapse]="isCollapsedTT">
-                    <input currencyMask type="text" [options]="{ allowNegative: 'false' }" class="form-control" placeholder="Custom Transfer Threhsold" [(ngModel)]="registerAccount.transferThreshold" id="transferThreshold" name="transferThreshold" #transferThresholdInput="ngModel"
+                    <input currencyMask type="text" [disabled]="TTDisabled" (blur)="transferThresholdBlur()" [options]="{ allowNegative: 'false' }" class="form-control" placeholder="Custom Transfer Threhsold" [(ngModel)]="registerAccount.transferThreshold" id="transferThreshold" name="transferThreshold" #transferThresholdInput="ngModel"
                             required minlength="1" maxlength="10">
                             <div *ngIf="transferThresholdInput.dirty && transferThresholdInput.invalid">
                                 <small class="form-text text-danger"
@@ -220,9 +235,18 @@
                                     This field cannot be longer than 10 characters.
                                 </small>
                             </div>
+                            <div class="alert alert-danger" *ngIf="transferLow">
+                                The transfer limit must be $2.00 or greater.
+                            </div>
+                            <div class="alert alert-danger" *ngIf="transferHigh">
+                                The transfer limit must be under $1000.00.
+                            </div>
+                            <div class="alert alert-danger" *ngIf="transferLowTweet">
+                                The transfer limit must be greater than the tweet limit.
+                            </div>
                         </div>
                 </div>
-                <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-primary" jhiTranslate="register.form.button">Register</button>
+                <button type="submit" [disabled]="registerForm.form.invalid && badTT" class="btn btn-primary" jhiTranslate="register.form.button">Register</button>
             </form>
             <p></p>
             <div class="alert alert-warning">

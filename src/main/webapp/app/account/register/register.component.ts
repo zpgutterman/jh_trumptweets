@@ -15,7 +15,18 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     public isCollapsedTL = true;
     public isCollapsedML = true;
     public isCollapsedTT = true;
+    public MLDisabled = true;
+    public TTDisabled = true;
+    public badTT = true;
     doNotMatch: string;
+    tweetLow: string;
+    tweetHigh: string;
+    monthlyLow: string;
+    monthlyHigh: string;
+    monthlyLowTweet: string;
+    transferLow: string;
+    transferHigh: string;
+    transferLowTweet: string;
     invalidDonation: string;
     error: string;
     errorEmailExists: string;
@@ -43,18 +54,63 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#login'), 'focus', []);
     }
 
-    validateDonationRules() {
 
+    tweetLimitBlur() {
+      this.tweetLow = null;
+      this.tweetHigh = null;
+      if (parseFloat(this.registerAccount.tweetLimit) < .10 )
+      this.tweetLow = 'ERROR';
+      if (parseFloat(this.registerAccount.tweetLimit) > 999.99 )
+      this.tweetHigh = 'ERROR';
+      if (this.tweetLow == null && this.tweetHigh == null)
+      this.MLDisabled = false;
+      else {
+        this.MLDisabled = true;
+      }
 
     }
 
+    monthlyLimitBlur() {
+      this.monthlyLow = null;
+      this.monthlyHigh = null;
+      this.monthlyLowTweet = null;
+      if (parseFloat(this.registerAccount.monthlyLimit) < 2.50 )
+      this.monthlyLow = 'ERROR';
+      if (parseFloat(this.registerAccount.monthlyLimit) > 999.99 )
+      this.monthlyHigh = 'ERROR';
+      if (parseFloat(this.registerAccount.monthlyLimit) < parseFloat(this.registerAccount.tweetLimit))
+      this.monthlyLowTweet = 'ERROR';
+      if (this.monthlyLow == null && this.monthlyHigh == null && this.monthlyLowTweet == null)
+      this.TTDisabled = false;
+      else {
+        this.TTDisabled = true;
+      }
+    }
+
+    transferThresholdBlur() {
+        this.transferLow = null;
+        this.transferHigh = null;
+        this.transferLowTweet = null;
+        if (parseFloat(this.registerAccount.transferThreshold) < 2.00 )
+        this.transferLow = 'ERROR';
+        if (parseFloat(this.registerAccount.transferThreshold) > 999.99 )
+        this.transferHigh = 'ERROR';
+        if (parseFloat(this.registerAccount.transferThreshold) < parseFloat(this.registerAccount.tweetLimit))
+        this.transferLowTweet = 'ERROR';
+        if (this.transferLow == null && this.transferHigh == null && this.transferLowTweet == null) {
+        this.badTT = false;
+        }
+        else {
+          this.badTT = true;
+        }
+
+    }
 
     register() {
 
         if (this.registerAccount.password !== this.confirmPassword) {
             this.doNotMatch = 'ERROR';
         } else if (parseInt(this.registerAccount.tweetLimit,10) > parseInt(this.registerAccount.monthlyLimit,10)) {
-          console.log("tweet limit is higher than monthly limit")
             this.invalidDonation = 'ERROR';
         }
         else {
