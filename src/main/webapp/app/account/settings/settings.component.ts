@@ -57,7 +57,10 @@ export class SettingsComponent implements OnInit {
             langKey: account.langKey,
             lastName: account.lastName,
             login: account.login,
-            imageUrl: account.imageUrl
+            imageUrl: account.imageUrl,
+            tweetLimit: account.tweetLimit,
+            monthlyLimit: account.monthlyLimit,
+            transferThreshold: account.transferThreshold
         };
     }
 }

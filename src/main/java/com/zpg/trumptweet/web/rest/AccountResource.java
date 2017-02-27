@@ -164,7 +164,7 @@ public class AccountResource {
             .findOneByLogin(SecurityUtils.getCurrentUserLogin())
             .map(u -> {
                 userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
-                    userDTO.getLangKey());
+                    userDTO.getLangKey(), userDTO.getTweetLimit(), userDTO.getMonthlyLimit(), userDTO.getTransferThreshold());
                 return new ResponseEntity<String>(HttpStatus.OK);
             })
             .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));

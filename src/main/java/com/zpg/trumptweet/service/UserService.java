@@ -156,12 +156,15 @@ public class UserService {
     /**
      * Update basic information (first name, last name, email, language) for the current user.
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey) {
+    public void updateUser(String firstName, String lastName, String email, String langKey, BigDecimal tweetLimit, BigDecimal monthlyLimit, BigDecimal transferThreshold) {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setEmail(email);
             user.setLangKey(langKey);
+            user.setTweetLimit(tweetLimit);
+            user.setMonthlyLimit(monthlyLimit);
+            user.setTransferThreshold(transferThreshold);
             log.debug("Changed Information for User: {}", user);
         });
     }

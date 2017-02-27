@@ -72,6 +72,67 @@
                         </small>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="tweetLimit">Tweet Limit</label>
+                <input currencyMask type="text" class="form-control" placeholder="Tweet Limit" [(ngModel)]="settingsAccount.tweetLimit" id="tweetLimit" name="tweetLimit" #tweetLimitInput="ngModel" required minlength="1" maxlength="10">
+                        <div *ngIf="tweetLimitInput.dirty && tweetLimitInput.invalid">
+                            <small class="form-text text-danger"
+                               *ngIf="tweetLimitInput.errors.maxlength" jhiTranslate="entity.validation.maxlength"
+                               translate-value-max="10">
+                                This field cannot be longer than 10 characters.
+                            </small>
+                        </div>
+                        <div class="alert alert-danger" *ngIf="tweetLow">
+                            The tweet limit must be $0.10 or greater.
+                        </div>
+                        <div class="alert alert-danger" *ngIf="tweetHigh">
+                            The tweet limit must be under $1000.00.
+                        </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label" for="monthlyLimit">Monthly Limit</label>
+                  <input currencyMask type="text" [disabled]="MLDisabled" class="form-control" placeholder="Monthly Limit" [(ngModel)]="settingsAccount.monthlyLimit" id="monthlyLimit" name="monthlyLimit" #monthlyLimitInput="ngModel"
+                          required minlength="1" maxlength="10">
+                          <div *ngIf="monthlyLimitInput.dirty && monthlyLimitInput.invalid">
+                              <small class="form-text text-danger"
+                                 *ngIf="monthlyLimitInput.errors.maxlength" jhiTranslate="entity.validation.maxlength"
+                                 translate-value-max="10">
+                                  This field cannot be longer than 10 characters.
+                              </small>
+                          </div>
+                          <div class="alert alert-danger" *ngIf="monthlyLow">
+                              The monthly limit must be $2.50 or greater.
+                          </div>
+                          <div class="alert alert-danger" *ngIf="monthlyHigh">
+                              The monthly limit must be under $1000.00.
+                          </div>
+                          <div class="alert alert-danger" *ngIf="monthlyLowTweet">
+                              The monthly limit must be greater than the tweet limit.
+                          </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="transferThreshold">Transfer Threshold</label>
+                    <input currencyMask type="text" [disabled]="TTDisabled" [options]="{ allowNegative: 'false' }" class="form-control" placeholder="Transfer Threhsold" [(ngModel)]="settingsAccount.transferThreshold" id="transferThreshold" name="transferThreshold" #transferThresholdInput="ngModel"
+                            required minlength="1" maxlength="10">
+                            <div *ngIf="transferThresholdInput.dirty && transferThresholdInput.invalid">
+                                <small class="form-text text-danger"
+                                   *ngIf="transferThresholdInput.errors.maxlength" jhiTranslate="entity.validation.maxlength"
+                                   translate-value-max="10">
+                                    This field cannot be longer than 10 characters.
+                                </small>
+                            </div>
+                            <div class="alert alert-danger" *ngIf="transferLow">
+                                The transfer limit must be $2.00 or greater.
+                            </div>
+                            <div class="alert alert-danger" *ngIf="transferHigh">
+                                The transfer limit must be under $1000.00.
+                            </div>
+                            <div class="alert alert-danger" *ngIf="transferLowTweet">
+                                The transfer limit must be greater than the tweet limit.
+                            </div>
+                        </div>
+
+
                 <div class="form-group" *ngIf="languages && languages.length > 0">
                     <label for="langKey" jhiTranslate="settings.form.language">Language</label>
                     <select class="form-control" id="langKey" name="langKey" [(ngModel)]="settingsAccount.langKey">
