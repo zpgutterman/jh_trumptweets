@@ -41,7 +41,7 @@ public class Tweetlog implements Serializable {
     private String handle;
 
     @Column(name = "processed")
-    private Boolean processed;
+    private Boolean processed = false;
 
     @Column(name = "categorize_time")
     private ZonedDateTime categorize_time;
