@@ -19,9 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zpg.trumptweet.domain.Authority;
 import com.zpg.trumptweet.domain.User;
+import com.zpg.trumptweet.domain.User_preferences;
 import com.zpg.trumptweet.repository.AuthorityRepository;
 import com.zpg.trumptweet.repository.PersistentTokenRepository;
 import com.zpg.trumptweet.repository.UserRepository;
+import com.zpg.trumptweet.repository.User_preferencesRepository;
 import com.zpg.trumptweet.security.AuthoritiesConstants;
 import com.zpg.trumptweet.security.SecurityUtils;
 import com.zpg.trumptweet.service.dto.UserDTO;
@@ -45,13 +47,16 @@ public class UserService {
     private final PersistentTokenRepository persistentTokenRepository;
 
     private final AuthorityRepository authorityRepository;
+    
+    private final User_preferencesRepository user_preferencesRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository, User_preferencesRepository user_preferencesRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.socialService = socialService;
         this.persistentTokenRepository = persistentTokenRepository;
         this.authorityRepository = authorityRepository;
+        this.user_preferencesRepository = user_preferencesRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -97,6 +102,9 @@ public class UserService {
 
         User newUser = new User();
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+        User_preferences userPreference = new User_preferences();
+        
+        
         Set<Authority> authorities = new HashSet<>();
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(login);
@@ -118,6 +126,8 @@ public class UserService {
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
         log.debug("Created Information for User: {}", newUser);
+        userPreference.setUser(newUser);
+        user_preferencesRepository.save(userPreference);
         return newUser;
     }
 
