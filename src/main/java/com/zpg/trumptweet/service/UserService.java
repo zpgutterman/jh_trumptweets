@@ -133,6 +133,8 @@ public class UserService {
 
     public User createUser(UserDTO userDTO) {
         User user = new User();
+        User_preferences userPreference = new User_preferences();
+
         user.setLogin(userDTO.getLogin());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
@@ -150,6 +152,7 @@ public class UserService {
             );
             user.setAuthorities(authorities);
         }
+        
         user.setTransferThreshold(userDTO.getTransferThreshold());
         user.setMonthlyLimit(userDTO.getMonthlyLimit());
         user.setTweetLimit(userDTO.getTweetLimit());
@@ -158,7 +161,8 @@ public class UserService {
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(ZonedDateTime.now());
         user.setActivated(true);
-        userRepository.save(user);
+        userPreference.setUser(user);
+        user_preferencesRepository.save(userPreference);
         log.debug("Created Information for User: {}", user);
         return user;
     }
