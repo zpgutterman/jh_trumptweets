@@ -7,6 +7,7 @@ import { User_preferences } from './user-preferences.model';
 export class User_preferencesService {
 
     private resourceUrl = 'api/user-preferences';
+    private up = 'api/up/';
 
     constructor(private http: Http) { }
 
@@ -26,6 +27,13 @@ export class User_preferencesService {
 
     find(id: number): Observable<User_preferences> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
+            return res.json();
+        });
+    }
+
+    findByUser(): Observable<User_preferences> {
+        return this.http.get(`${this.up}`).map((res: Response) => {
+          console.log("response" + res.json());
             return res.json();
         });
     }

@@ -33,7 +33,6 @@ export class User_balancesService {
 
     findByUser(): Observable<User_balances[]> {
         return this.http.get(`${this.userbalancesUrl}`).map((res: Response) => {
-          console.log("response" + res.json());
             return res.json();
         });
     }

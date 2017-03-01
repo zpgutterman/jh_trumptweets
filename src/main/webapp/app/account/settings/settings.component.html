@@ -72,6 +72,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="tweetLimit">Tweet Limit</label>
                 <input currencyMask type="text" class="form-control" placeholder="Tweet Limit" [(ngModel)]="settingsAccount.tweetLimit" id="tweetLimit" name="tweetLimit" #tweetLimitInput="ngModel" required minlength="1" maxlength="10">
@@ -131,7 +132,14 @@
                                 The transfer limit must be greater than the tweet limit.
                             </div>
                         </div>
-
+                        <span *ngIf="user_preferences">
+                          <div class="form-group">
+                              <label for="field_excluded_categories">Excluded Categories</label>
+                              <select class="form-control" id="field_excluded_categories" #excluded_categories="ngModel" multiple name="excluded_categories" [(ngModel)]="user_preferences.excluded_categories">
+                                  <option [ngValue]="getSelected(user_preferences.excluded_categories, categoryOption)" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.name}}</option>
+                              </select>
+                          </div>
+                      </span>
 
                 <div class="form-group" *ngIf="languages && languages.length > 0">
                     <label for="langKey" jhiTranslate="settings.form.language">Language</label>

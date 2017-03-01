@@ -1,6 +1,7 @@
 package com.zpg.trumptweet.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.zpg.trumptweet.domain.User_balances;
 import com.zpg.trumptweet.domain.User_preferences;
 
 import com.zpg.trumptweet.repository.User_preferencesRepository;
@@ -96,6 +97,22 @@ public class User_preferencesResource {
         Page<User_preferences> page = user_preferencesRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/user-preferences");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /up/ : get the userpref for a user.
+     *
+     * @param id the id of the user to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the user_balances, or with status 404 (Not Found)
+     * @throws URISyntaxException 
+     */
+    @GetMapping("/up/")
+    @Timed
+    public ResponseEntity<User_preferences> getUserPrefByUser() {
+        log.debug("REST request to get User_pref for user : {}");
+        User_preferences result = user_preferencesRepository.findByUserIsCurrentUser();
+        log.debug(result.toString());
+        return new ResponseEntity<User_preferences>(result, HttpStatus.OK);
     }
 
     /**
