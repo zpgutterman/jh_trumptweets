@@ -18,6 +18,7 @@
             },
             "amount": "Amount",
             "processed": "Processed",
+            "processed_date": "Processed Date",
             "user": "User",
             "category": "Category"
         }

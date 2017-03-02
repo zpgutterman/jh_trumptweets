@@ -20,6 +20,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="amount"><span jhiTranslate="trumptweetApp.donation_log.amount">Amount</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="processed"><span jhiTranslate="trumptweetApp.donation_log.processed">Processed</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="processed_date"><span jhiTranslate="trumptweetApp.donation_log.processed_date">Processed Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="user.login"><span jhiTranslate="trumptweetApp.donation_log.user">User</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="category.name"><span jhiTranslate="trumptweetApp.donation_log.category">Category</span> <span class="fa fa-sort"></span></th>
             <th></th>
@@ -30,6 +31,7 @@
                 <td><a [routerLink]="['../donation-log', donation_log.id ]">{{donation_log.id}}</a></td>
                 <td>{{donation_log.amount}}</td>
                 <td>{{donation_log.processed}}</td>
+                <td>{{donation_log.processed_date | date:'medium'}}</td>
                 <td>
                     {{donation_log.user?.login}}
                 </td>

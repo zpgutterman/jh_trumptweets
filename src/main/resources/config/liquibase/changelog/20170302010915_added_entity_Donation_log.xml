@@ -29,6 +29,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="processed_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
             <column name="user_id" type="bigint">
                 <constraints nullable="false" />
             </column>
@@ -39,6 +43,7 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        <dropDefaultValue tableName="donation_log" columnName="processed_date" columnDataType="datetime"/>
         
     </changeSet>
 </databaseChangeLog>

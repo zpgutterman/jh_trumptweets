@@ -1,12 +1,14 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
 import { Donation_log } from './donation-log.model';
 import { Donation_logService } from './donation-log.service';
 @Injectable()
 export class Donation_logPopupService {
     private isOpen = false;
     constructor (
+        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private donation_logService: Donation_logService
@@ -20,6 +22,7 @@ export class Donation_logPopupService {
 
         if (id) {
             this.donation_logService.find(id).subscribe(donation_log => {
+                donation_log.processed_date = this.datePipe.transform(donation_log.processed_date, 'yyyy-MM-ddThh:mm');
                 this.donation_logModalRef(component, donation_log);
             });
         } else {

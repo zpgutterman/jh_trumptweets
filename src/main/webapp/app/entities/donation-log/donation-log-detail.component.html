@@ -12,6 +12,10 @@
         <dd>
             <span>{{donation_log.processed}}</span>
         </dd>
+        <dt><span jhiTranslate="trumptweetApp.donation_log.processed_date">Processed Date</span></dt>
+        <dd>
+            <span>{{donation_log.processed_date | date:'medium'}}</span>
+        </dd>
         <dt><span jhiTranslate="trumptweetApp.donation_log.user">User</span></dt>
         <dd>
             {{donation_log.user?.login}}

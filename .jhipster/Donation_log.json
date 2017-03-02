@@ -36,6 +36,10 @@
             "fieldName": "processed",
             "fieldType": "Boolean",
             "fieldValidateRules": []
+        },
+        {
+            "fieldName": "processed_date",
+            "fieldType": "ZonedDateTime"
         }
     ],
     "changelogDate": "20170302010915",

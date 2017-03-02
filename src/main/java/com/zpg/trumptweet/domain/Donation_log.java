@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -31,6 +32,9 @@ public class Donation_log implements Serializable {
 
     @Column(name = "processed")
     private Boolean processed;
+
+    @Column(name = "processed_date")
+    private ZonedDateTime processed_date;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -72,6 +76,19 @@ public class Donation_log implements Serializable {
 
     public void setProcessed(Boolean processed) {
         this.processed = processed;
+    }
+
+    public ZonedDateTime getProcessed_date() {
+        return processed_date;
+    }
+
+    public Donation_log processed_date(ZonedDateTime processed_date) {
+        this.processed_date = processed_date;
+        return this;
+    }
+
+    public void setProcessed_date(ZonedDateTime processed_date) {
+        this.processed_date = processed_date;
     }
 
     public User getUser() {
@@ -126,6 +143,7 @@ public class Donation_log implements Serializable {
             "id=" + id +
             ", amount='" + amount + "'" +
             ", processed='" + processed + "'" +
+            ", processed_date='" + processed_date + "'" +
             '}';
     }
 }

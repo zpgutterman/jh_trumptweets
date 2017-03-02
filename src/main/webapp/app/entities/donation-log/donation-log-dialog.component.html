@@ -40,6 +40,13 @@
                 [(ngModel)]="donation_log.processed"
              />
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="trumptweetApp.donation_log.processed_date" for="field_processed_date">Processed Date</label>
+            <div class="input-group">
+                <input id="field_processed_date" type="datetime-local" class="form-control" name="processed_date" [(ngModel)]="donation_log.processed_date"
+                  />
+            </div>
+        </div>
 
         <div class="form-group">
             <label jhiTranslate="trumptweetApp.donation_log.user" for="field_user">User</label>

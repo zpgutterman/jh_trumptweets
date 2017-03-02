@@ -5,6 +5,7 @@ export class Donation_log {
         public id?: number,
         public amount?: number,
         public processed?: boolean,
+        public processed_date?: any,
         public user?: User,
         public category?: Category,
     ) { }
