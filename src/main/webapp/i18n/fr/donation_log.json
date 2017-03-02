@@ -1,0 +1,25 @@
+{
+    "trumptweetApp": {
+        "donation_log" : {
+            "home": {
+                "title": "Donation_logs",
+                "createLabel": "Créer un nouveau Donation Log",
+                "createOrEditLabel": "Créer ou éditer un Donation Log",
+                "search": "Recherche pour Donation Log"
+            },
+            "created": "Un nouveau Donation Log a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Donation Log avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Donation Log avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Donation Log {{ id }} ?"
+            },
+            "detail": {
+                "title": "Donation Log"
+            },
+            "amount": "Amount",
+            "processed": "Processed",
+            "user": "User",
+            "category": "Category"
+        }
+    }
+}

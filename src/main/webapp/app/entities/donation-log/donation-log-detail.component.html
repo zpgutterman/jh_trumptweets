@@ -1,0 +1,39 @@
+
+<div *ngIf="donation_log">
+    <h2><span jhiTranslate="trumptweetApp.donation_log.detail.title">Donation Log</span> {{donation_log.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="trumptweetApp.donation_log.amount">Amount</span></dt>
+        <dd>
+            <span>{{donation_log.amount}}</span>
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.donation_log.processed">Processed</span></dt>
+        <dd>
+            <span>{{donation_log.processed}}</span>
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.donation_log.user">User</span></dt>
+        <dd>
+            {{donation_log.user?.login}}
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.donation_log.category">Category</span></dt>
+        <dd>
+            <div *ngIf="donation_log.category">
+                <a [routerLink]="['category', donation_log.category?.id]">{{donation_log.category?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'donation-log/'+ donation_log.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

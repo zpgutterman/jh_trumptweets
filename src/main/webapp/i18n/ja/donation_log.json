@@ -1,0 +1,25 @@
+{
+    "trumptweetApp": {
+        "donation_log" : {
+            "home": {
+                "title": "Donation_logs",
+                "createLabel": "Donation Log を追加",
+                "createOrEditLabel": "Donation Logを追加または編集",
+                "search": "Search for Donation Log"
+            },
+            "created": "A new Donation Log is created with identifier {{ param }}",
+            "updated": "A Donation Log is updated with identifier {{ param }}",
+            "deleted": "A Donation Log is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Donation Log {{ id }}を削除してもよろしいですか？"
+            },
+            "detail": {
+                "title": "Donation Log"
+            },
+            "amount": "Amount",
+            "processed": "Processed",
+            "user": "User",
+            "category": "Category"
+        }
+    }
+}

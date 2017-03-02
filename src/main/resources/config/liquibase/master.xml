@@ -18,11 +18,13 @@
     <include file="config/liquibase/changelog/20170216224905_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170228124405_changelog.xml" relativeToChangelogFile="false"/>
     
+    <include file="classpath:config/liquibase/changelog/20170302010915_added_entity_Donation_log.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20170208000124_added_entity_constraints_Charity.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170208021253_added_entity_constraints_Tweetlog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170211222306_added_entity_constraints_User_preferences.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170212170224_added_entity_constraints_User_balances.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170212175931_added_entity_constraints_User_tweet_log.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170302010915_added_entity_constraints_Donation_log.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

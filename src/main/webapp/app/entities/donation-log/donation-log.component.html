@@ -1,0 +1,73 @@
+<div>
+    <h2><span jhiTranslate="trumptweetApp.donation_log.home.title">Donation Logs</span>
+        <button class="btn btn-primary float-xs-right create-donation-log" [routerLink]="['/', { outlets: { popup: ['donation-log-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="trumptweetApp.donation_log.home.createLabel">
+            Create new Donation Log
+            </span>
+        </button></h2>
+    <jhi-alert></jhi-alert>
+
+    <div class="container-fluid">
+        <div class="row">
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="donation_logs">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="amount"><span jhiTranslate="trumptweetApp.donation_log.amount">Amount</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="processed"><span jhiTranslate="trumptweetApp.donation_log.processed">Processed</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="user.login"><span jhiTranslate="trumptweetApp.donation_log.user">User</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="category.name"><span jhiTranslate="trumptweetApp.donation_log.category">Category</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let donation_log of donation_logs ;trackBy: trackId">
+                <td><a [routerLink]="['../donation-log', donation_log.id ]">{{donation_log.id}}</a></td>
+                <td>{{donation_log.amount}}</td>
+                <td>{{donation_log.processed}}</td>
+                <td>
+                    {{donation_log.user?.login}}
+                </td>
+                <td>
+                    <div *ngIf="donation_log.category">
+                        <a [routerLink]="['../category', donation_log.category?.id ]" >{{donation_log.category?.name}}</a>
+                    </div>
+                </td>
+                <td class="text-xs-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../donation-log', donation_log.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'donation-log/'+ donation_log.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'donation-log/'+ donation_log.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <div class="text-xs-center" *ngIf="donation_logs && donation_logs.length">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+</div>

@@ -52,5 +52,7 @@
 
     <cache alias="com.zpg.trumptweet.domain.User_tweet_log" uses-template="simple"/>
 
+    <cache alias="com.zpg.trumptweet.domain.Donation_log" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>
