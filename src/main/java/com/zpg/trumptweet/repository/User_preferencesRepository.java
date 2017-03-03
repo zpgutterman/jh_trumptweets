@@ -1,5 +1,6 @@
 package com.zpg.trumptweet.repository;
 
+import com.zpg.trumptweet.domain.User;
 import com.zpg.trumptweet.domain.User_balances;
 import com.zpg.trumptweet.domain.User_preferences;
 
@@ -22,5 +23,8 @@ public interface User_preferencesRepository extends JpaRepository<User_preferenc
     
     @Query("select user_preferences from User_preferences user_preferences left join fetch user_preferences.excluded_categories where user_preferences.user.login = ?#{principal.username}")
     User_preferences findByUserIsCurrentUser();
+    
+    @Query("select user_preferences from User_preferences user_preferences where user_preferences.user.id = :id")
+	User_preferences findByUser(@Param("id") Long id);
 
 }

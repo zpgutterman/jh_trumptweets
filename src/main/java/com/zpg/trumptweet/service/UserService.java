@@ -226,7 +226,13 @@ public class UserService {
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
             socialService.deleteUserSocialConnection(user.getLogin());
+            
+            User_preferences up = user_preferencesRepository.findByUser(user.getId());
+            if (up != null) {
+            	user_preferencesRepository.delete(up);
+            }
             userRepository.delete(user);
+            
             log.debug("Deleted User: {}", user);
         });
     }
@@ -289,6 +295,10 @@ public class UserService {
         List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(now.minusDays(3));
         for (User user : users) {
             log.debug("Deleting not activated user {}", user.getLogin());
+            User_preferences up = user_preferencesRepository.findByUser(user.getId());
+            if (up != null) {
+            	user_preferencesRepository.delete(up);
+            }
             userRepository.delete(user);
         }
     }
