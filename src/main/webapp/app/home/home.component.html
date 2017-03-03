@@ -44,22 +44,37 @@
             </li>
           </ul>
         </div>
+        <div *ngSwitchCase="true">
+          <span>Recent Tweets:</span>
+          <div class="table-responsive recent-tweets" *ngIf="tweetlogs">
+              <table class="table table-striped">
+                  <thead>
+                  <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+                  <th jhiSortBy="tweet">Tweet<span class="fa fa-sort"></span></th>
+                  <th jhiSortBy="tweet_date">Tweet Date <span class="fa fa-sort"></span></th>
+                  <th jhiSortBy="handle">Handle<span class="fa fa-sort"></span></th>
+
+                  <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let tweetlog of tweetlogs ;trackBy: trackId">
+                      <td>{{tweetlog.tweet}}</td>
+                      <td>{{tweetlog.tweet_date | date:'short'}}</td>
+                      <td>{{tweetlog.handle}}</td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div class="text-xs-center" *ngIf="tweetlogs">
+              <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+              <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+          </div>
+        </div>
       </div>
 
         <p>
-            Links:
-        </p>
-
-        <ul>
-            <li><a href="http://jhipster.github.io/" target="_blank" jhiTranslate="home.link.homepage">JHipster homepage</a></li>
-            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" jhiTranslate="home.link.stackoverflow">JHipster on Stack Overflow</a></li>
-            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" jhiTranslate="home.link.bugtracker">JHipster bug tracker</a></li>
-            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" jhiTranslate="home.link.chat">JHipster public chat room</a></li>
-            <li><a href="https://twitter.com/java_hipster" target="_blank"  jhiTranslate="home.link.follow">follow @java_hipster on Twitter</a></li>
-        </ul>
-
-        <p>
-            <span jhiTranslate="home.like">If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" jhiTranslate="home.github">Github</a>!
+            Everyone can see this.
         </p>
     </div>
 </div>

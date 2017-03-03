@@ -23,3 +23,7 @@ only screen and (                min-resolution: 2dppx) {
         background-size: contain;
     }
 }
+
+.recent-tweets {
+  width: 60%;
+}

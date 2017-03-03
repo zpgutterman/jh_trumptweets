@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EventManager, JhiLanguageService } from 'ng-jhipster';
+import { EventManager, JhiLanguageService, ParseLinks, PaginationUtil, AlertService } from 'ng-jhipster';
 import { User_balances, User_balancesService } from '../entities/user-balances';
-import { Account, LoginModalService, Principal } from '../shared';
+import { ITEMS_PER_PAGE, Account, LoginModalService, Principal } from '../shared';
+import { PaginationConfig } from '../blocks/config/uib-pagination.config';
+import { Response } from '@angular/http';
+import { Tweetlog } from '../entities/tweetlog/tweetlog.model';
+import { TweetlogService } from '../entities/tweetlog/tweetlog.service';
+import { Subscription } from 'rxjs/Rx';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-home',
@@ -16,21 +22,54 @@ export class HomeComponent implements OnInit {
     account: Account;
     user_balances: User_balances[];
     modalRef: NgbModalRef;
+    tweetlogs: Tweetlog[];
+    eventSubscriber: Subscription;
+    itemsPerPage: number;
+    links: any;
+    page: any;
+    predicate: any;
+    queryCount: any;
+    reverse: any;
+    totalItems: number;
+    routeData: any;
+    previousPage: any;
 
     constructor(
         private jhiLanguageService: JhiLanguageService,
         private principal: Principal,
         private loginModalService: LoginModalService,
         private ubService: User_balancesService,
-        private eventManager: EventManager
+        private eventManager: EventManager,
+        private tweetlogService: TweetlogService,
+        private alertService: AlertService,
+        private paginationUtil: PaginationUtil,
+        private paginationConfig: PaginationConfig,
+        private parseLinks: ParseLinks,
+        private activatedRoute: ActivatedRoute,
+        private router: Router
     ) {
-        this.jhiLanguageService.setLocations(['home']);
+      {
+          this.tweetlogs = [];
+          this.itemsPerPage = 5;
+          this.jhiLanguageService.setLocations(['home']);
+
+          this.routeData = this.activatedRoute.data.subscribe(data => {
+              this.page = data['pagingParams'].page;
+              this.previousPage = data['pagingParams'].page;
+              this.reverse = data['pagingParams'].ascending;
+              this.predicate = data['pagingParams'].predicate;
+          });
+      }
+
+
     }
 
     ngOnInit() {
         this.principal.identity().then((account) => {
             this.account = account;
             if (this.isAuthenticated()) {
+              this.loadAll();
+              this.registerChangeInTweetlogs();
             this.loadBalances();
           }
         });
@@ -64,5 +103,73 @@ export class HomeComponent implements OnInit {
 
     login() {
         this.modalRef = this.loginModalService.open();
+    }
+
+    ngOnDestroy() {
+        this.routeData.unsubscribe;
+    }
+
+    trackId (index: number, item: Tweetlog) {
+        return item.id;
+    }
+
+
+
+    registerChangeInTweetlogs() {
+        this.eventSubscriber = this.eventManager.subscribe('tweetlogListModification', (response) => this.reset());
+    }
+
+    sort () {
+        let result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
+        if (this.predicate !== 'id') {
+            result.push('id');
+        }
+        return result;
+    }
+
+  
+    loadAll () {
+        this.tweetlogService.query({
+            page: this.page -1,
+            size: this.itemsPerPage,
+            sort: this.sort()}).subscribe(
+            (res: Response) => this.onSuccess(res.json(), res.headers),
+            (res: Response) => this.onError(res.json())
+        );
+    }
+
+    reset () {
+        this.page = 0;
+        this.tweetlogs = [];
+        this.loadAll();
+    }
+
+    loadPage (page: number) {
+        if (page !== this.previousPage) {
+            this.previousPage = page;
+            this.transition();
+        }
+    }
+
+    private onSuccess(data, headers) {
+        // hide anonymous user from user management: it's a required user for Spring Security
+
+        this.links = this.parseLinks.parse(headers.get('link'));
+        this.totalItems = headers.get('X-Total-Count');
+        this.queryCount = this.totalItems;
+        this.tweetlogs = data;
+    }
+
+    transition () {
+        this.router.navigate(['/'], { queryParams:
+                {
+                    page: this.page,
+                    sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+                }
+        });
+        this.loadAll();
+    }
+    private onError (error) {
+        this.alertService.error(error.message, null, null);
     }
 }

@@ -25,6 +25,9 @@ import {
     ErrorComponent
 } from './layouts';
 
+import {
+  HomeResolvePagingParams
+} from './home';
 
 @NgModule({
     imports: [
@@ -51,6 +54,7 @@ import {
         { provide: Document, useValue: document },
         customHttpProvider(),
         PaginationConfig,
+        HomeResolvePagingParams,
         UserRouteAccessService
     ],
     bootstrap: [ JhiMainComponent ]
