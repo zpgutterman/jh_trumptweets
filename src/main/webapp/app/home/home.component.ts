@@ -30,7 +30,9 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.principal.identity().then((account) => {
             this.account = account;
+            if (this.isAuthenticated()) {
             this.loadBalances();
+          }
         });
         this.registerAuthenticationSuccess();
     }
