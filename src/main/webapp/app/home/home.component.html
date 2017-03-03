@@ -1,10 +1,8 @@
 <div class="row">
-    <div class="col-md-3">
-        <span class="hipster img-fluid img-rounded"></span>
-    </div>
-    <div class="col-md-9">
-        <h1 class="display-4">Resistcents</h1>
-        <p class="lead" jhiTranslate="home.subtitle">Put your money where his mouth is.</p>
+  <h1 class="display-4">Resistcents</h1>
+  <p class="lead" jhiTranslate="home.subtitle">Put your money where his mouth is.</p>
+    <div class="col-lg-6 user-info">
+
 
         <div [ngSwitch]="isAuthenticated()">
             <div class="alert alert-success" *ngSwitchCase="true">
@@ -44,9 +42,13 @@
             </li>
           </ul>
         </div>
+      </div>
+    </div>
+    <div class="col-lg-6 recent-tweets">
+      <div [ngSwitch]="isAuthenticated()">
         <div *ngSwitchCase="true">
           <span>Recent Tweets:</span>
-          <div class="table-responsive recent-tweets" *ngIf="tweetlogs">
+          <div class="table-responsive" *ngIf="tweetlogs">
               <table class="table table-striped">
                   <thead>
                   <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
@@ -73,7 +75,7 @@
                   </tbody>
               </table>
           </div>
-          <div class="text-xs-center" *ngIf="tweetlogs">
+          <div class="text-xs-center recent-tweets" *ngIf="tweetlogs">
               <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
               <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
           </div>

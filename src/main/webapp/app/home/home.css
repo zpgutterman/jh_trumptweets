@@ -24,6 +24,7 @@ only screen and (                min-resolution: 2dppx) {
     }
 }
 
-.recent-tweets {
-  width: 60%;
+
+.user-info {
+  width: 30%;
 }
