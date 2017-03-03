@@ -53,6 +53,7 @@
                   <th jhiSortBy="tweet">Tweet<span class="fa fa-sort"></span></th>
                   <th jhiSortBy="tweet_date">Tweet Date <span class="fa fa-sort"></span></th>
                   <th jhiSortBy="handle">Handle<span class="fa fa-sort"></span></th>
+                  <th jhiSortBy="category">Category<span class="fa fa-sort"></span></th>
 
                   <th></th>
                   </tr>
@@ -62,6 +63,12 @@
                       <td>{{tweetlog.tweet}}</td>
                       <td>{{tweetlog.tweet_date | date:'short'}}</td>
                       <td>{{tweetlog.handle}}</td>
+                      <td>
+                        <ul>
+                        <li *ngFor="let category of tweetlog.categories">{{category.name}}</li>
+                      </ul>
+
+                      </td>
                   </tr>
                   </tbody>
               </table>

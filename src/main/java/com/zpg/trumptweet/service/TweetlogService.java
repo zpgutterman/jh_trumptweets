@@ -48,6 +48,9 @@ public class TweetlogService {
     public Page<Tweetlog> findAll(Pageable pageable) {
         log.debug("Request to get all Tweetlogs");
         Page<Tweetlog> result = tweetlogRepository.findAll(pageable);
+        for (Tweetlog tweet : result.getContent()){
+        	tweet = tweetlogRepository.findOneWithEagerRelationships(tweet.getId());
+        }
         return result;
     }
 
