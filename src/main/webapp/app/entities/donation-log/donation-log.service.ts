@@ -8,6 +8,7 @@ import { DateUtils } from 'ng-jhipster';
 export class Donation_logService {
 
     private resourceUrl = 'api/donation-logs';
+    private totalUrl = 'api/donation-total';
 
     constructor(private http: Http, private dateUtils: DateUtils) { }
 
@@ -33,6 +34,13 @@ export class Donation_logService {
             let jsonResponse = res.json();
             jsonResponse.processed_date = this.dateUtils
                 .convertDateTimeFromServer(jsonResponse.processed_date);
+            return jsonResponse;
+        });
+    }
+
+    findTotalUser(): Observable<number> {
+        return this.http.get(`${this.totalUrl}`).map((res: Response) => {
+            let jsonResponse = res.json();
             return jsonResponse;
         });
     }

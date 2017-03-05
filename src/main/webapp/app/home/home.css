@@ -24,6 +24,9 @@ only screen and (                min-resolution: 2dppx) {
     }
 }
 
+.user-balances {
+  list-style: none;
+}
 
 .user-info {
   width: 30%;

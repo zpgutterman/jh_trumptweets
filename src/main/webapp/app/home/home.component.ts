@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { EventManager, JhiLanguageService, ParseLinks, PaginationUtil, AlertService } from 'ng-jhipster';
 import { User_balances, User_balancesService } from '../entities/user-balances';
+import { Donation_log, Donation_logService } from '../entities/donation-log';
 import { ITEMS_PER_PAGE, Account, LoginModalService, Principal } from '../shared';
 import { PaginationConfig } from '../blocks/config/uib-pagination.config';
 import { Response } from '@angular/http';
@@ -20,6 +21,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
     account: Account;
+    donationLog: Donation_log[];
+    totalDonation: number;
     user_balances: User_balances[];
     modalRef: NgbModalRef;
     tweetlogs: Tweetlog[];
@@ -37,6 +40,7 @@ export class HomeComponent implements OnInit {
     constructor(
         private jhiLanguageService: JhiLanguageService,
         private principal: Principal,
+        private donationLogService: Donation_logService,
         private loginModalService: LoginModalService,
         private ubService: User_balancesService,
         private eventManager: EventManager,
@@ -70,6 +74,7 @@ export class HomeComponent implements OnInit {
             if (this.isAuthenticated()) {
               this.loadAll();
               this.registerChangeInTweetlogs();
+              this.loadTotalDonation();
             this.loadBalances();
           }
         });
@@ -86,7 +91,15 @@ export class HomeComponent implements OnInit {
                                    console.log(err);
                                });
    }
-
+   loadTotalDonation() {
+      this.donationLogService.findTotalUser()
+      .subscribe(
+          totalDonation => this.totalDonation = totalDonation, //Bind to view
+           err => {
+               // Log errors if any
+               console.log(err);
+           });
+   }
 
 
     registerAuthenticationSuccess() {
@@ -127,7 +140,7 @@ export class HomeComponent implements OnInit {
         return result;
     }
 
-  
+
     loadAll () {
         this.tweetlogService.query({
             page: this.page -1,

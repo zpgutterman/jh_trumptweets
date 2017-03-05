@@ -1,15 +1,17 @@
 package com.zpg.trumptweet.service;
 
-import com.zpg.trumptweet.domain.Donation_log;
-import com.zpg.trumptweet.repository.Donation_logRepository;
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.zpg.trumptweet.domain.Donation_log;
+import com.zpg.trumptweet.repository.Donation_logRepository;
 
 /**
  * Service Implementation for managing Donation_log.
@@ -63,6 +65,26 @@ public class Donation_logService {
         Donation_log donation_log = donation_logRepository.findOne(id);
         return donation_log;
     }
+    
+    /**
+     *  Get total donations for one user
+     *
+     *  @param id the id of the entity
+     *  @return the entity
+     */
+    @Transactional(readOnly = true)
+    public BigDecimal findTotal() {
+        log.debug("Request to get Donation_total");
+        List<Donation_log> donation_logs = donation_logRepository.findByUserIsCurrentUser();
+        BigDecimal total = BigDecimal.ZERO;
+        for (Donation_log log : donation_logs) {
+        	if (log.isProcessed()){
+        		total = total.add(log.getAmount());
+        	}
+        }
+        return total;
+    }
+
 
     /**
      *  Delete the  donation_log by id.

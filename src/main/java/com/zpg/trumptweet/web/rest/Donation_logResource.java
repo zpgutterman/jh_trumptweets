@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -110,6 +112,20 @@ public class Donation_logResource {
         log.debug("REST request to get Donation_log : {}", id);
         Donation_log donation_log = donation_logService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(donation_log));
+    }
+    
+    /**
+     * GET  /donation-logs/:id : get the "id" donation_log.
+     *
+     * @param id the id of the donation_log to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the donation_log, or with status 404 (Not Found)
+     */
+    @GetMapping("/donation-total")
+    @Timed
+    public ResponseEntity<BigDecimal> getDonationTotal() {
+        log.debug("REST request to get donation total");
+        BigDecimal total = donation_logService.findTotal();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(total));
     }
 
     /**

@@ -19,20 +19,25 @@
                 <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>
                 <a class="alert-link" routerLink="register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
             </div>
+            <div *ngSwitchCase="true">
+              <span>Total Donated:</span>
+              <br />
+              <span *ngIf="totalDonation">{{totalDonation | currency:'USD':true:'1.2-2'}}</span>
+            </div>
         <div *ngSwitchCase="true">
 
           <span>Donation Information:</span>
           <br />
           <span><a routerLink="donation-settings">Edit</a></span>
           <ul>
+            <li><span *ngIf="account">Tweet Limit: {{account.tweetLimit | currency:'USD':true:'1.2-2'}}</span></li>
             <li><span *ngIf="account">Monthly Limit: {{account.monthlyLimit | currency:'USD':true:'1.2-2'}}</span></li>
-            <li><span *ngIf="account">Per Tweet Limit: {{account.tweetLimit | currency:'USD':true:'1.2-2'}}</span></li>
             <li><span *ngIf="account">Transfer Threshold: {{account.transferThreshold | currency:'USD':true:'1.2-2'}}</span></li>
           </ul>
         </div>
         <div *ngSwitchCase="true">
           <span>Balances:</span>
-          <ul>
+          <ul class="user-balances">
             <li *ngFor="let ub of user_balances">
               {{ub.category.name}} : {{ub.balance | currency:'USD':true:'1.2-2'}}
               <br />
@@ -41,6 +46,7 @@
             </span>
             </li>
           </ul>
+
         </div>
       </div>
     </div>
