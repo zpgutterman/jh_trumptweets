@@ -9,6 +9,8 @@ export class Donation_logService {
 
     private resourceUrl = 'api/donation-logs';
     private totalUrl = 'api/donation-total';
+    private totalMonthUrl = 'api/donation-month';
+    private pendingUrl = 'api/pending-payments';
 
     constructor(private http: Http, private dateUtils: DateUtils) { }
 
@@ -43,6 +45,24 @@ export class Donation_logService {
             let jsonResponse = res.json();
             return jsonResponse;
         });
+    }
+
+    findMonthlyProgress(): Observable<Donation_log[]> {
+      return this.http.get(`${this.totalMonthUrl}`).map((res: Response) => {
+          let jsonResponse = res.json();
+          jsonResponse.processed_date = this.dateUtils
+              .convertDateTimeFromServer(jsonResponse.processed_date);
+          return jsonResponse;
+      });
+    }
+
+    findPendingPayments(): Observable<Donation_log[]> {
+      return this.http.get(`${this.pendingUrl}`).map((res: Response) => {
+          let jsonResponse = res.json();
+          jsonResponse.processed_date = this.dateUtils
+              .convertDateTimeFromServer(jsonResponse.processed_date);
+          return jsonResponse;
+      });
     }
 
     query(req?: any): Observable<Response> {

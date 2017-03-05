@@ -95,4 +95,14 @@ public class Donation_logService {
         log.debug("Request to delete Donation_log : {}", id);
         donation_logRepository.delete(id);
     }
+    
+    /**
+     *  Get pending payments for current user
+     *
+     *  @return list of donation log pending payments
+     */
+	public List<Donation_log> findPendingPayments() {
+		List<Donation_log> pendingPayments = donation_logRepository.findPendingPaymentsByCurrentUser();
+		return pendingPayments;
+	}
 }

@@ -31,3 +31,7 @@ only screen and (                min-resolution: 2dppx) {
 .user-info {
   width: 30%;
 }
+
+.pending-transactions {
+  list-style: decimal;
+}

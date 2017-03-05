@@ -127,6 +127,21 @@ public class Donation_logResource {
         BigDecimal total = donation_logService.findTotal();
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(total));
     }
+    
+    /**
+     * GET  /pending-payments : get all the pending payments for current user.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of donation_logs in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/pending-payments")
+    @Timed
+    public ResponseEntity<List<Donation_log>> getPendingPayments()
+        throws URISyntaxException {
+        log.debug("REST request to get all pending payments");
+        List<Donation_log> pendingPayments = donation_logService.findPendingPayments();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(pendingPayments));
+    }
 
     /**
      * DELETE  /donation-logs/:id : delete the "id" donation_log.

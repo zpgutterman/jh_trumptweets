@@ -22,6 +22,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HomeComponent implements OnInit {
     account: Account;
     donationLog: Donation_log[];
+    pending_payments: Donation_log[];
     totalDonation: number;
     user_balances: User_balances[];
     modalRef: NgbModalRef;
@@ -75,6 +76,7 @@ export class HomeComponent implements OnInit {
               this.loadAll();
               this.registerChangeInTweetlogs();
               this.loadTotalDonation();
+              this.loadPendingPayments();
             this.loadBalances();
           }
         });
@@ -99,6 +101,15 @@ export class HomeComponent implements OnInit {
                // Log errors if any
                console.log(err);
            });
+   }
+
+   loadPendingPayments() {
+     this.donationLogService.findPendingPayments().subscribe(
+         pending_payments => this.pending_payments = pending_payments, //Bind to view
+          err => {
+              // Log errors if any
+              console.log(err);
+          });
    }
 
 
@@ -139,7 +150,6 @@ export class HomeComponent implements OnInit {
         }
         return result;
     }
-
 
     loadAll () {
         this.tweetlogService.query({

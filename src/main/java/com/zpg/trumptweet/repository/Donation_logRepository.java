@@ -14,5 +14,8 @@ public interface Donation_logRepository extends JpaRepository<Donation_log,Long>
 
     @Query("select donation_log from Donation_log donation_log where donation_log.user.login = ?#{principal.username}")
     List<Donation_log> findByUserIsCurrentUser();
+    
+    @Query("select donation_log from Donation_log donation_log where donation_log.user.login = ?#{principal.username} and donation_log.processed != true")
+	List<Donation_log> findPendingPaymentsByCurrentUser();
 
 }

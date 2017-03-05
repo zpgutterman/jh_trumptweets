@@ -31,7 +31,7 @@ public class Donation_log implements Serializable {
     private BigDecimal amount;
 
     @Column(name = "processed")
-    private Boolean processed;
+    private Boolean processed = false;
 
     @Column(name = "processed_date")
     private ZonedDateTime processed_date;
