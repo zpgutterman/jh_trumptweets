@@ -3,6 +3,7 @@ package com.zpg.trumptweet.repository;
 import com.zpg.trumptweet.domain.Donation_log;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -17,5 +18,8 @@ public interface Donation_logRepository extends JpaRepository<Donation_log,Long>
     
     @Query("select donation_log from Donation_log donation_log where donation_log.user.login = ?#{principal.username} and donation_log.processed != true")
 	List<Donation_log> findPendingPaymentsByCurrentUser();
+	
+	@Query("select donation_log from Donation_log donation_log where donation_log.user.login = ?#{principal.username} and donation_log.processed = true and to_char(donation_log.processed_date,'YYYY/MM') = :date") 
+	List<Donation_log> findTotalMonthCurrentUser(@Param("date") String date);
 
 }

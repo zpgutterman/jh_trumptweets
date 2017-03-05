@@ -1,6 +1,7 @@
 package com.zpg.trumptweet.service;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -84,6 +85,36 @@ public class Donation_logService {
         }
         return total;
     }
+    
+    /**
+     *  Get total donations for current month
+     *
+     *  @param id the id of the entity
+     *  @return the entity
+     */
+    @Transactional(readOnly = true)
+    public BigDecimal findTotalMonth() {
+        log.debug("Request to get Donation_total_month");
+        Calendar cal = Calendar.getInstance();
+		int month = cal.get(Calendar.MONTH);
+		month ++; //months are 0 indexed. neat. why.
+		int year = cal.get(Calendar.YEAR);		
+		String yearMonth;
+		if (month >= 10){ //Need padding for months under 10
+			yearMonth = year + "/" + month;
+		}else {
+			yearMonth = year + "/0" + month;
+		}
+		log.debug("yearmonth is " + yearMonth);
+        List<Donation_log> donation_logs = donation_logRepository.findTotalMonthCurrentUser(yearMonth);
+        BigDecimal total = BigDecimal.ZERO;
+        for (Donation_log log : donation_logs) {
+        	if (log.isProcessed()){
+        		total = total.add(log.getAmount());
+        	}
+        }
+        return total;
+    }
 
 
     /**
@@ -105,4 +136,6 @@ public class Donation_logService {
 		List<Donation_log> pendingPayments = donation_logRepository.findPendingPaymentsByCurrentUser();
 		return pendingPayments;
 	}
+
+	
 }

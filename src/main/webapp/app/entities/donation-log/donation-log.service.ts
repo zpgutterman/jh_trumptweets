@@ -47,11 +47,9 @@ export class Donation_logService {
         });
     }
 
-    findMonthlyProgress(): Observable<Donation_log[]> {
+    findMonthlyProgress(): Observable<number> {
       return this.http.get(`${this.totalMonthUrl}`).map((res: Response) => {
           let jsonResponse = res.json();
-          jsonResponse.processed_date = this.dateUtils
-              .convertDateTimeFromServer(jsonResponse.processed_date);
           return jsonResponse;
       });
     }

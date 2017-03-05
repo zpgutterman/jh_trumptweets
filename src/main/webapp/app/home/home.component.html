@@ -34,6 +34,13 @@
             <li><span *ngIf="account">Monthly Limit: {{account.monthlyLimit | currency:'USD':true:'1.2-2'}}</span></li>
             <li><span *ngIf="account">Transfer Threshold: {{account.transferThreshold | currency:'USD':true:'1.2-2'}}</span></li>
           </ul>
+          Monthly Progress for <span *ngIf="today">{{today | date:'MMMM'}}</span>:
+          <span *ngIf="monthlyProgress">
+            <span *ngIf="account">
+              {{monthlyProgress | currency:'USD':true:'1.2-2'}} out of {{account.monthlyLimit | currency:'USD':true:'1.2-2'}}
+              <ngb-progressbar value="{{monthlyProgress}}" max="{{account.monthlyLimit}}"></ngb-progressbar>
+            </span>
+          </span>
         </div>
 
         <div *ngSwitchCase="true">

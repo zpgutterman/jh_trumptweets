@@ -129,6 +129,19 @@ public class Donation_logResource {
     }
     
     /**
+     * GET  /donation-month get the donation total for the current user for the current month
+     * @param id the id of the donation_log to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the donation_log, or with status 404 (Not Found)
+     */
+    @GetMapping("/donation-month")
+    @Timed
+    public ResponseEntity<BigDecimal> getDonationMonthTotal() {
+        log.debug("REST request to get donation total");
+        BigDecimal total = donation_logService.findTotalMonth();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(total));
+    }
+    
+    /**
      * GET  /pending-payments : get all the pending payments for current user.
      *
      * @return the ResponseEntity with status 200 (OK) and the list of donation_logs in body

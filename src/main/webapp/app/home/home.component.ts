@@ -22,6 +22,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HomeComponent implements OnInit {
     account: Account;
     donationLog: Donation_log[];
+    monthlyProgress: number;
     pending_payments: Donation_log[];
     totalDonation: number;
     user_balances: User_balances[];
@@ -30,6 +31,7 @@ export class HomeComponent implements OnInit {
     eventSubscriber: Subscription;
     itemsPerPage: number;
     links: any;
+    today: number = Date.now();
     page: any;
     predicate: any;
     queryCount: any;
@@ -77,6 +79,7 @@ export class HomeComponent implements OnInit {
               this.registerChangeInTweetlogs();
               this.loadTotalDonation();
               this.loadPendingPayments();
+              this.loadMonthlyProgress();
             this.loadBalances();
           }
         });
@@ -97,6 +100,16 @@ export class HomeComponent implements OnInit {
       this.donationLogService.findTotalUser()
       .subscribe(
           totalDonation => this.totalDonation = totalDonation, //Bind to view
+           err => {
+               // Log errors if any
+               console.log(err);
+           });
+   }
+
+   loadMonthlyProgress() {
+      this.donationLogService.findMonthlyProgress()
+      .subscribe(
+          monthlyProgress => this.monthlyProgress = monthlyProgress, //Bind to view
            err => {
                // Log errors if any
                console.log(err);
