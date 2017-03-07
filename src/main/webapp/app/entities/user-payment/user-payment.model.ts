@@ -5,6 +5,7 @@ export class User_payment {
         public token?: string,
         public name?: string,
         public method?: string,
+        public lastFour?: string,
         public user?: User,
     ) { }
 }

@@ -19,6 +19,7 @@
             "token": "Token",
             "name": "Name",
             "method": "Method",
+            "lastFour": "Last Four",
             "user": "User"
         }
     }

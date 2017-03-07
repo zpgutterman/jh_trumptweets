@@ -31,6 +31,10 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "lastFour",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20170307000205",

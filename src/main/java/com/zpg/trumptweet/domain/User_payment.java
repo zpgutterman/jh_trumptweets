@@ -34,6 +34,9 @@ public class User_payment implements Serializable {
     @Column(name = "method", nullable = false)
     private String method;
 
+    @Column(name = "last_four")
+    private String lastFour;
+
     @ManyToOne(optional = false)
     @NotNull
     private User user;
@@ -85,6 +88,19 @@ public class User_payment implements Serializable {
         this.method = method;
     }
 
+    public String getLastFour() {
+        return lastFour;
+    }
+
+    public User_payment lastFour(String lastFour) {
+        this.lastFour = lastFour;
+        return this;
+    }
+
+    public void setLastFour(String lastFour) {
+        this.lastFour = lastFour;
+    }
+
     public User getUser() {
         return user;
     }
@@ -125,6 +141,7 @@ public class User_payment implements Serializable {
             ", token='" + token + "'" +
             ", name='" + name + "'" +
             ", method='" + method + "'" +
+            ", lastFour='" + lastFour + "'" +
             '}';
     }
 }

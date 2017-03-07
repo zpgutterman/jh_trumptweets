@@ -44,6 +44,12 @@
                 </small>
             </div>
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="trumptweetApp.user_payment.lastFour" for="field_lastFour">Last Four</label>
+            <input type="text" class="form-control" name="lastFour" id="field_lastFour"
+                [(ngModel)]="user_payment.lastFour"
+             />
+        </div>
 
         <div class="form-group">
             <label jhiTranslate="trumptweetApp.user_payment.user" for="field_user">User</label>
