@@ -7,6 +7,7 @@ import { TrumptweetUser_preferencesModule } from './user-preferences/user-prefer
 import { TrumptweetUser_balancesModule } from './user-balances/user-balances.module';
 import { TrumptweetUser_tweet_logModule } from './user-tweet-log/user-tweet-log.module';
 import { TrumptweetDonation_logModule } from './donation-log/donation-log.module';
+import { TrumptweetUser_paymentModule } from './user-payment/user-payment.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -18,6 +19,7 @@ import { TrumptweetDonation_logModule } from './donation-log/donation-log.module
         TrumptweetUser_balancesModule,
         TrumptweetUser_tweet_logModule,
         TrumptweetDonation_logModule,
+        TrumptweetUser_paymentModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

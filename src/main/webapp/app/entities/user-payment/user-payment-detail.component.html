@@ -1,0 +1,37 @@
+
+<div *ngIf="user_payment">
+    <h2><span jhiTranslate="trumptweetApp.user_payment.detail.title">User Payment</span> {{user_payment.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row">
+        <dt><span jhiTranslate="trumptweetApp.user_payment.token">Token</span></dt>
+        <dd>
+            <span>{{user_payment.token}}</span>
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.user_payment.name">Name</span></dt>
+        <dd>
+            <span>{{user_payment.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.user_payment.method">Method</span></dt>
+        <dd>
+            <span>{{user_payment.method}}</span>
+        </dd>
+        <dt><span jhiTranslate="trumptweetApp.user_payment.user">User</span></dt>
+        <dd>
+            {{user_payment.user?.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'user-payment/'+ user_payment.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

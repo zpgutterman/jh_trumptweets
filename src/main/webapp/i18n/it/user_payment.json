@@ -1,0 +1,25 @@
+{
+    "trumptweetApp": {
+        "user_payment" : {
+            "home": {
+                "title": "User_payments",
+                "createLabel": "Genera un nuovo User Payment",
+                "createOrEditLabel": "Genera o modifica un User Payment",
+                "search": "Cerca User Payment"
+            },
+            "created": "&Egrave; stato generato un nuovo User Payment con identificatore { param }}",
+            "updated": "&Egrave; stato aggiornato User Payment identificato da {{ param }}",
+            "deleted": "&Egrave; stato eliminato User Payment con identificatore {{ param }}",
+            "delete": {
+                "question": "Sei sicuro di volere eliminare User Payment {{ id }}?"
+            },
+            "detail": {
+                "title": "User Payment"
+            },
+            "token": "Token",
+            "name": "Name",
+            "method": "Method",
+            "user": "User"
+        }
+    }
+}
