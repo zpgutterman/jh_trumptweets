@@ -78,7 +78,6 @@
                   <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
                   <th jhiSortBy="tweet">Tweet<span class="fa fa-sort"></span></th>
                   <th jhiSortBy="tweet_date">Tweet Date <span class="fa fa-sort"></span></th>
-                  <th jhiSortBy="handle">Handle<span class="fa fa-sort"></span></th>
                   <th jhiSortBy="category">Category<span class="fa fa-sort"></span></th>
 
                   <th></th>
@@ -86,9 +85,9 @@
                   </thead>
                   <tbody>
                   <tr *ngFor="let tweetlog of tweetlogs ;trackBy: trackId">
-                      <td>{{tweetlog.tweet}}</td>
+                      <td><span class="handle">@{{tweetlog.handle}}</span> {{tweetlog.tweet}}</td>
                       <td>{{tweetlog.tweet_date | date:'short'}}</td>
-                      <td>{{tweetlog.handle}}</td>
+
                       <td>
                         <ul>
                         <li *ngFor="let category of tweetlog.categories">{{category.name}}</li>

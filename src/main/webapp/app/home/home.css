@@ -35,3 +35,7 @@ only screen and (                min-resolution: 2dppx) {
 .pending-transactions {
   list-style: decimal;
 }
+
+.handle {
+  font-weight: bold;
+}
