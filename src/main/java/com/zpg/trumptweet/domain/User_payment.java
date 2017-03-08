@@ -37,6 +37,9 @@ public class User_payment implements Serializable {
     @Column(name = "last_four")
     private String lastFour;
 
+    @Column(name = "valid")
+    private Boolean valid;
+
     @ManyToOne(optional = false)
     @NotNull
     private User user;
@@ -101,6 +104,19 @@ public class User_payment implements Serializable {
         this.lastFour = lastFour;
     }
 
+    public Boolean isValid() {
+        return valid;
+    }
+
+    public User_payment valid(Boolean valid) {
+        this.valid = valid;
+        return this;
+    }
+
+    public void setValid(Boolean valid) {
+        this.valid = valid;
+    }
+
     public User getUser() {
         return user;
     }
@@ -142,6 +158,7 @@ public class User_payment implements Serializable {
             ", name='" + name + "'" +
             ", method='" + method + "'" +
             ", lastFour='" + lastFour + "'" +
+            ", valid='" + valid + "'" +
             '}';
     }
 }

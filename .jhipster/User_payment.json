@@ -35,6 +35,11 @@
         {
             "fieldName": "lastFour",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "valid",
+            "fieldType": "Boolean",
+            "fieldValidateRules": []
         }
     ],
     "changelogDate": "20170307000205",

@@ -50,6 +50,9 @@ public class User_paymentResourceIntTest {
     private static final String DEFAULT_LAST_FOUR = "AAAAAAAAAA";
     private static final String UPDATED_LAST_FOUR = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_VALID = false;
+    private static final Boolean UPDATED_VALID = true;
+
     @Autowired
     private User_paymentRepository user_paymentRepository;
 
@@ -89,7 +92,8 @@ public class User_paymentResourceIntTest {
                 .token(DEFAULT_TOKEN)
                 .name(DEFAULT_NAME)
                 .method(DEFAULT_METHOD)
-                .lastFour(DEFAULT_LAST_FOUR);
+                .lastFour(DEFAULT_LAST_FOUR)
+                .valid(DEFAULT_VALID);
         // Add required entity
         User user = UserResourceIntTest.createEntity(em);
         em.persist(user);
@@ -123,6 +127,7 @@ public class User_paymentResourceIntTest {
         assertThat(testUser_payment.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testUser_payment.getMethod()).isEqualTo(DEFAULT_METHOD);
         assertThat(testUser_payment.getLastFour()).isEqualTo(DEFAULT_LAST_FOUR);
+        assertThat(testUser_payment.isValid()).isEqualTo(DEFAULT_VALID);
     }
 
     @Test
@@ -195,7 +200,8 @@ public class User_paymentResourceIntTest {
             .andExpect(jsonPath("$.[*].token").value(hasItem(DEFAULT_TOKEN.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].method").value(hasItem(DEFAULT_METHOD.toString())))
-            .andExpect(jsonPath("$.[*].lastFour").value(hasItem(DEFAULT_LAST_FOUR.toString())));
+            .andExpect(jsonPath("$.[*].lastFour").value(hasItem(DEFAULT_LAST_FOUR.toString())))
+            .andExpect(jsonPath("$.[*].valid").value(hasItem(DEFAULT_VALID.booleanValue())));
     }
 
     @Test
@@ -212,7 +218,8 @@ public class User_paymentResourceIntTest {
             .andExpect(jsonPath("$.token").value(DEFAULT_TOKEN.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.method").value(DEFAULT_METHOD.toString()))
-            .andExpect(jsonPath("$.lastFour").value(DEFAULT_LAST_FOUR.toString()));
+            .andExpect(jsonPath("$.lastFour").value(DEFAULT_LAST_FOUR.toString()))
+            .andExpect(jsonPath("$.valid").value(DEFAULT_VALID.booleanValue()));
     }
 
     @Test
@@ -237,7 +244,8 @@ public class User_paymentResourceIntTest {
                 .token(UPDATED_TOKEN)
                 .name(UPDATED_NAME)
                 .method(UPDATED_METHOD)
-                .lastFour(UPDATED_LAST_FOUR);
+                .lastFour(UPDATED_LAST_FOUR)
+                .valid(UPDATED_VALID);
 
         restUser_paymentMockMvc.perform(put("/api/user-payments")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -252,6 +260,7 @@ public class User_paymentResourceIntTest {
         assertThat(testUser_payment.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testUser_payment.getMethod()).isEqualTo(UPDATED_METHOD);
         assertThat(testUser_payment.getLastFour()).isEqualTo(UPDATED_LAST_FOUR);
+        assertThat(testUser_payment.isValid()).isEqualTo(UPDATED_VALID);
     }
 
     @Test
