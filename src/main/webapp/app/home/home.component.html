@@ -68,7 +68,7 @@
       <div [ngSwitch]="isAuthenticated()">
         <div *ngSwitchCase="true">
           <div class="table-responsive" *ngIf="tweetlogs">
-              <table class="table tweetTable">
+              <table class="table tweetTable table-curved">
 
                   <tbody>
                   <tr class="{{tweetlog.categories[0].name}}" *ngFor="let tweetlog of tweetlogs ;trackBy: trackId">
