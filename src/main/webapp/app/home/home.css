@@ -80,6 +80,10 @@ only screen and (                min-resolution: 2dppx) {
 }
 
 
-.tweetTable{
-border: 0;
+.categoryTweetList{
+  list-style-type: none;
+}
+
+.categoryCell {
+  vertical-align: middle;
 }
