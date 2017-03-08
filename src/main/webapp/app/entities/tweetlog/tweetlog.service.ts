@@ -8,6 +8,7 @@ import { DateUtils } from 'ng-jhipster';
 export class TweetlogService {
 
     private resourceUrl = 'api/tweetlogs';
+    private resourceCatUrl = 'api/tweetlogscategorized';
 
     constructor(private http: Http, private dateUtils: DateUtils) { }
 
@@ -45,6 +46,13 @@ export class TweetlogService {
     query(req?: any): Observable<Response> {
         let options = this.createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
+            .map((res: any) => this.convertResponse(res))
+        ;
+    }
+
+    queryCategorized(req?: any): Observable<Response> {
+        let options = this.createRequestOption(req);
+        return this.http.get(this.resourceCatUrl, options)
             .map((res: any) => this.convertResponse(res))
         ;
     }

@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
     ) {
       {
           this.tweetlogs = [];
-          this.itemsPerPage = 5;
+          this.itemsPerPage = ITEMS_PER_PAGE;
           this.jhiLanguageService.setLocations(['home']);
 
           this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -150,8 +150,6 @@ export class HomeComponent implements OnInit {
         return item.id;
     }
 
-
-
     registerChangeInTweetlogs() {
         this.eventSubscriber = this.eventManager.subscribe('tweetlogListModification', (response) => this.reset());
     }
@@ -165,7 +163,7 @@ export class HomeComponent implements OnInit {
     }
 
     loadAll () {
-        this.tweetlogService.query({
+        this.tweetlogService.queryCategorized({
             page: this.page -1,
             size: this.itemsPerPage,
             sort: this.sort()}).subscribe(
@@ -188,9 +186,8 @@ export class HomeComponent implements OnInit {
     }
 
     private onSuccess(data, headers) {
-        // hide anonymous user from user management: it's a required user for Spring Security
-
         this.links = this.parseLinks.parse(headers.get('link'));
+        console.log("links" + headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         this.tweetlogs = data;

@@ -97,6 +97,23 @@ public class TweetlogResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tweetlogs");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    /**
+     * GET  /tweetlogscategorized : get all the tweetlogs.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of tweetlogs in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/tweetlogscategorized")
+    @Timed
+    public ResponseEntity<List<Tweetlog>> getCategorizedTweetlogs(@ApiParam Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Tweetlogs");
+        Page<Tweetlog> page = tweetlogService.findAllCategorized(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tweetlogscategorized");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     /**
      * GET  /tweetlogs/:id : get the "id" tweetlog.
