@@ -87,3 +87,7 @@ only screen and (                min-resolution: 2dppx) {
 .categoryCell {
   vertical-align: middle;
 }
+
+.tweetTable .td, .tweetTable .th{
+  border-top: none;
+}
