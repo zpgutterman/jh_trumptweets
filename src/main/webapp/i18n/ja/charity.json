@@ -3,15 +3,15 @@
         "charity" : {
             "home": {
                 "title": "Charities",
-                "createLabel": "Create a new Charity",
-                "createOrEditLabel": "Create or edit a Charity",
+                "createLabel": "Charity を追加",
+                "createOrEditLabel": "Charityを追加または編集",
                 "search": "Search for Charity"
             },
             "created": "A new Charity is created with identifier {{ param }}",
             "updated": "A Charity is updated with identifier {{ param }}",
             "deleted": "A Charity is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Charity {{ id }}?"
+                "question": "Charity {{ id }}を削除してもよろしいですか？"
             },
             "detail": {
                 "title": "Charity"

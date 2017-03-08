@@ -18,6 +18,7 @@
             },
             "name": "Name",
             "website": "Website",
+            "ein": "Ein",
             "category": "Category"
         }
     }

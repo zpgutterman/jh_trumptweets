@@ -20,6 +20,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="trumptweetApp.charity.name">Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="website"><span jhiTranslate="trumptweetApp.charity.website">Website</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="ein"><span jhiTranslate="trumptweetApp.charity.ein">Ein</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="category.name"><span jhiTranslate="trumptweetApp.charity.category">Category</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
@@ -29,6 +30,7 @@
                 <td><a [routerLink]="['../charity', charity.id ]">{{charity.id}}</a></td>
                 <td>{{charity.name}}</td>
                 <td>{{charity.website}}</td>
+                <td>{{charity.ein}}</td>
                 <td>
                     <div *ngIf="charity.category">
                         <a [routerLink]="['../category', charity.category?.id ]" >{{charity.category?.name}}</a>

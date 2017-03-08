@@ -4,6 +4,7 @@ export class Charity {
         public id?: number,
         public name?: string,
         public website?: string,
+        public ein?: string,
         public category?: Category,
     ) { }
 }

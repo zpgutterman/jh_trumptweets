@@ -42,6 +42,9 @@ public class CharityResourceIntTest {
     private static final String DEFAULT_WEBSITE = "AAAAAAAAAA";
     private static final String UPDATED_WEBSITE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_EIN = "AAAAAAAAAA";
+    private static final String UPDATED_EIN = "BBBBBBBBBB";
+
     @Autowired
     private CharityRepository charityRepository;
 
@@ -76,7 +79,8 @@ public class CharityResourceIntTest {
     public static Charity createEntity(EntityManager em) {
         Charity charity = new Charity()
                 .name(DEFAULT_NAME)
-                .website(DEFAULT_WEBSITE);
+                .website(DEFAULT_WEBSITE)
+                .ein(DEFAULT_EIN);
         return charity;
     }
 
@@ -103,6 +107,7 @@ public class CharityResourceIntTest {
         Charity testCharity = charityList.get(charityList.size() - 1);
         assertThat(testCharity.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCharity.getWebsite()).isEqualTo(DEFAULT_WEBSITE);
+        assertThat(testCharity.getEin()).isEqualTo(DEFAULT_EIN);
     }
 
     @Test
@@ -155,7 +160,8 @@ public class CharityResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(charity.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].website").value(hasItem(DEFAULT_WEBSITE.toString())));
+            .andExpect(jsonPath("$.[*].website").value(hasItem(DEFAULT_WEBSITE.toString())))
+            .andExpect(jsonPath("$.[*].ein").value(hasItem(DEFAULT_EIN.toString())));
     }
 
     @Test
@@ -170,7 +176,8 @@ public class CharityResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(charity.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.website").value(DEFAULT_WEBSITE.toString()));
+            .andExpect(jsonPath("$.website").value(DEFAULT_WEBSITE.toString()))
+            .andExpect(jsonPath("$.ein").value(DEFAULT_EIN.toString()));
     }
 
     @Test
@@ -192,7 +199,8 @@ public class CharityResourceIntTest {
         Charity updatedCharity = charityRepository.findOne(charity.getId());
         updatedCharity
                 .name(UPDATED_NAME)
-                .website(UPDATED_WEBSITE);
+                .website(UPDATED_WEBSITE)
+                .ein(UPDATED_EIN);
 
         restCharityMockMvc.perform(put("/api/charities")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -205,6 +213,7 @@ public class CharityResourceIntTest {
         Charity testCharity = charityList.get(charityList.size() - 1);
         assertThat(testCharity.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCharity.getWebsite()).isEqualTo(UPDATED_WEBSITE);
+        assertThat(testCharity.getEin()).isEqualTo(UPDATED_EIN);
     }
 
     @Test

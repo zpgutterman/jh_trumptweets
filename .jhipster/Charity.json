@@ -25,6 +25,10 @@
                 "minlength"
             ],
             "fieldValidateRulesMinlength": "2"
+        },
+        {
+            "fieldName": "ein",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20170208000124",

@@ -22,8 +22,9 @@
     <include file="config/liquibase/changelog/20170302011915_added_column_Donation_log.xml" relativeToChangelogFile="false"/>
     
     <include file="config/liquibase/changelog/20170307000205_added_entity_User_payment.xml" relativeToChangelogFile="false"/>
-      <include file="config/liquibase/changelog/20170306011915_added_column_User_payment.xml" relativeToChangelogFile="false"/>
-            <include file="config/liquibase/changelog/20170306011915_added_column_User_payment2.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170306011915_added_column_User_payment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170306011915_added_column_User_payment2.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170307011915_added_column_Charity.xml" relativeToChangelogFile="false"/>
       
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20170208000124_added_entity_constraints_Charity.xml" relativeToChangelogFile="false"/>
