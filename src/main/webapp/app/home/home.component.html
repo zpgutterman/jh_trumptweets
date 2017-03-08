@@ -34,7 +34,7 @@
           <span *ngIf="monthlyProgress">
             <span *ngIf="account">
               {{monthlyProgress | currency:'USD':true:'1.2-2'}} out of {{account.monthlyLimit | currency:'USD':true:'1.2-2'}}
-              <ngb-progressbar value="{{monthlyProgress}}" max="{{account.monthlyLimit}}"></ngb-progressbar>
+              <ngb-progressbar type="Monthly" value="{{monthlyProgress}}" max="{{account.monthlyLimit}}"></ngb-progressbar>
             </span>
           </span>
         </div>
@@ -46,7 +46,7 @@
               {{ub.category.name}} : {{ub.balance | currency:'USD':true:'1.2-2'}}
               <br />
               <span *ngIf="account">
-              <ngb-progressbar value="{{ub.balance}}" max="{{account.transferThreshold}}"></ngb-progressbar>
+              <ngb-progressbar type="{{ub.category.name}}" value="{{ub.balance}}" max="{{account.transferThreshold}}"></ngb-progressbar>
             </span>
             </li>
           </ul>
@@ -68,10 +68,10 @@
       <div [ngSwitch]="isAuthenticated()">
         <div *ngSwitchCase="true">
           <div class="table-responsive" *ngIf="tweetlogs">
-              <table class="table table-striped">
+              <table class="table tweetTable">
 
                   <tbody>
-                  <tr *ngFor="let tweetlog of tweetlogs ;trackBy: trackId">
+                  <tr class="{{tweetlog.categories[0].name}}" *ngFor="let tweetlog of tweetlogs ;trackBy: trackId">
                       <td><span class="handle">@{{tweetlog.handle}}</span> {{tweetlog.tweet}}</td>
                       <td>{{tweetlog.tweet_date | date:'short'}}</td>
 

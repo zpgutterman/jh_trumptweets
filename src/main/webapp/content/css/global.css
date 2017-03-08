@@ -9,6 +9,39 @@ body, h1, h2, h3, h4 {
 .progress {
   width: 85%;
 }
+
+progress[value].progress-Immigration::-webkit-progress-value {
+  background-color: #adddec;
+
+}
+
+progress[value].progress-Women\'s::-webkit-progress-value {
+  background-color: #ffdab9;
+
+}
+
+
+progress[value].progress-Healthcare::-webkit-progress-value {
+  background-color: #ff9393;
+
+
+}
+
+progress[value].progress-Environment::-webkit-progress-value {
+  background-color: #7cbd7c;
+
+}
+
+progress[value].progress-Civil::-webkit-progress-value {
+  background-color: #e9ef9b;
+}
+
+progress[value].progress-Monthly::-webkit-progress-value {
+  background-color: #2e2f2f;
+}
+
+
+
 /* ==========================================================================
 Browser Upgrade Prompt
 ========================================================================== */

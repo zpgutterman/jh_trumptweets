@@ -58,3 +58,28 @@ only screen and (                min-resolution: 2dppx) {
   font-weight: lighter;
   font-size: x-large;
 }
+
+.Environment {
+  background-color: #7cbd7c;
+}
+
+.Healthcare {
+  background-color: #ff9393;
+}
+
+.Health {
+  background-color: #ffdab9;
+}
+
+.Civil {
+  background-color: #e9ef9b;
+}
+
+.Immigration {
+  background-color: #adddec;
+}
+
+
+.tweetTable{
+border: 0;
+}
