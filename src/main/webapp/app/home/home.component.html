@@ -5,9 +5,8 @@
 
 
         <div [ngSwitch]="isAuthenticated()">
-            <div class="alert alert-success" *ngSwitchCase="true">
-                <span *ngIf="account" jhiTranslate="home.logged.message"
-                    translateValues="{username: '{{account.login}}'}"> You are logged in as user "{{account.login}}". </span>
+            <div *ngSwitchCase="true">
+                <span class="user-name" *ngIf="account"> {{account.firstName}} {{account.lastName}}</span>
             </div>
 
             <div class="alert alert-warning" *ngSwitchCase="false">
@@ -22,18 +21,15 @@
             <div *ngSwitchCase="true">
               <span>Total Donated:</span>
               <br />
-              <span *ngIf="totalDonation">{{totalDonation | currency:'USD':true:'1.2-2'}}</span>
+              <span class="totalDonation" *ngIf="totalDonation">{{totalDonation | currency:'USD':true:'1.2-2'}}</span>
             </div>
         <div *ngSwitchCase="true">
 
-          <span>Donation Information:</span>
+          <span class="editDonation"><a routerLink="donation-settings">Edit</a></span>
+          <span>Per Tweet:</span>
           <br />
-          <span><a routerLink="donation-settings">Edit</a></span>
-          <ul>
-            <li><span *ngIf="account">Tweet Limit: {{account.tweetLimit | currency:'USD':true:'1.2-2'}}</span></li>
-            <li><span *ngIf="account">Monthly Limit: {{account.monthlyLimit | currency:'USD':true:'1.2-2'}}</span></li>
-            <li><span *ngIf="account">Transfer Threshold: {{account.transferThreshold | currency:'USD':true:'1.2-2'}}</span></li>
-          </ul>
+          <span class="perTweetAmount" *ngIf="account">{{account.tweetLimit | currency:'USD':true:'1.2-2'}}</span>
+          <br />
           Monthly Progress for <span *ngIf="today">{{today | date:'MMMM'}}</span>:
           <span *ngIf="monthlyProgress">
             <span *ngIf="account">
@@ -71,18 +67,9 @@
     <div class="col-lg-8 recent-tweets">
       <div [ngSwitch]="isAuthenticated()">
         <div *ngSwitchCase="true">
-          <span>Recent Tweets:</span>
           <div class="table-responsive" *ngIf="tweetlogs">
               <table class="table table-striped">
-                  <thead>
-                  <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-                  <th jhiSortBy="tweet">Tweet<span class="fa fa-sort"></span></th>
-                  <th jhiSortBy="tweet_date">Tweet Date <span class="fa fa-sort"></span></th>
-                  <th jhiSortBy="category">Category<span class="fa fa-sort"></span></th>
 
-                  <th></th>
-                  </tr>
-                  </thead>
                   <tbody>
                   <tr *ngFor="let tweetlog of tweetlogs ;trackBy: trackId">
                       <td><span class="handle">@{{tweetlog.handle}}</span> {{tweetlog.tweet}}</td>

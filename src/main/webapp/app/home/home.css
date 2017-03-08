@@ -39,3 +39,22 @@ only screen and (                min-resolution: 2dppx) {
 .handle {
   font-weight: bold;
 }
+
+.user-name {
+  font-weight: lighter;
+  font-size: x-large;
+}
+
+.editDonation {
+  float: right;
+}
+
+.totalDonation {
+  font-weight: lighter;
+  font-size: xx-large;
+}
+
+.perTweetAmount {
+  font-weight: lighter;
+  font-size: x-large;
+}
