@@ -29,14 +29,8 @@
           <span>Per Tweet:</span>
           <br />
           <span class="perTweetAmount" *ngIf="account">{{account.tweetLimit | currency:'USD':true:'1.2-2'}}</span>
-          <br />
-          Monthly Progress for <span *ngIf="today">{{today | date:'MMMM'}}</span>:
-          <span *ngIf="monthlyProgress">
-            <span *ngIf="account">
-              {{monthlyProgress | currency:'USD':true:'1.2-2'}} out of {{account.monthlyLimit | currency:'USD':true:'1.2-2'}}
-              <ngb-progressbar type="Monthly" value="{{monthlyProgress}}" max="{{account.monthlyLimit}}"></ngb-progressbar>
-            </span>
-          </span>
+
+
         </div>
 
         <div *ngSwitchCase="true">
@@ -52,6 +46,16 @@
           </ul>
 
         </div>
+        <div *ngSwitchCase="true">
+        Monthly Progress for <span *ngIf="today">{{today | date:'MMMM'}}</span>:
+        <br />
+        <span *ngIf="monthlyProgress">
+          <span *ngIf="account">
+            {{monthlyProgress | currency:'USD':true:'1.2-2'}} out of {{account.monthlyLimit | currency:'USD':true:'1.2-2'}}
+            <ngb-progressbar type="Monthly" value="{{monthlyProgress}}" max="{{account.monthlyLimit}}"></ngb-progressbar>
+          </span>
+        </span>
+      </div>
         <div *ngSwitchCase="true">
           <div *ngIf="pending_payments?.length > 0">
             <span>Pending Transactions:</span>
