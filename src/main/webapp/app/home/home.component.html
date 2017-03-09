@@ -72,8 +72,7 @@
 
                   <tbody>
                   <tr class="{{tweetlog.categories[0].name}}" *ngFor="let tweetlog of tweetlogs ;trackBy: trackId">
-                      <td><span class="handle">@{{tweetlog.handle}}</span> {{tweetlog.tweet}}</td>
-                      <td>{{tweetlog.tweet_date | date:'short'}}</td>
+                      <td class="tweetCell"><span class="handle">@{{tweetlog.handle}}</span> {{tweetlog.tweet}} <span class="tweetDate">{{tweetlog.tweet_date | date:'short'}}</span></td>
 
                       <td class="categoryCell">
                         <ul class="categoryTweetList">

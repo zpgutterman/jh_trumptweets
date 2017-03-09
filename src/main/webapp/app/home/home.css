@@ -59,6 +59,9 @@ only screen and (                min-resolution: 2dppx) {
   font-size: x-large;
 }
 
+.tweetCell {
+
+}
 .Environment {
   background-color: #7cbd7c;
 }
@@ -79,13 +82,16 @@ only screen and (                min-resolution: 2dppx) {
   background-color: #adddec;
 }
 
-
+.tweetDate{
+  font-size: x-small;
+}
 .categoryTweetList{
   list-style-type: none;
 }
 
 .categoryCell {
   vertical-align: middle;
+  white-space: nowrap;
 }
 
 .tweetTable .td, .tweetTable .th{
@@ -105,7 +111,7 @@ only screen and (                min-resolution: 2dppx) {
 
 }
 .table-curved td, .table-curved th {
-
+  border-top: none;
 }
 .table-curved > :first-child > :first-child > :first-child {
     border-radius: 6px 0 0 0;
