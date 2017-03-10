@@ -5,6 +5,8 @@ import { JhiLanguageService } from 'ng-jhipster';
 import { Register } from './register.service';
 import { LoginModalService } from '../../shared';
 
+declare var Panda:any;
+
 @Component({
     selector: 'jhi-register',
     templateUrl: './register.component.html'
@@ -18,6 +20,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     public MLDisabled = true;
     public TTDisabled = true;
     public badTT = true;
+    private cardToken:any;
     doNotMatch: string;
     tweetLow: string;
     tweetHigh: string;
@@ -29,6 +32,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     transferLowTweet: string;
     invalidDonation: string;
     error: string;
+    token: string;
     errorEmailExists: string;
     errorUserExists: string;
     registerAccount: any;
@@ -48,12 +52,28 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.success = false;
         this.registerAccount = {};
+        this.setUpCard();
     }
+
+    setUpCard() {
+    Panda.init('pk_test_Xr7iBvkRL4U9t0ETYfnIxQ', 'form');
+    Panda.on('success', cardToken => this.handleCardToken(cardToken));
+    Panda.on('error', errors => this.handleCardTokenError(errors));
+  }
+
+  handleCardToken(token) {
+this.token = token;
+this.register();
+  }
+
+  handleCardTokenError(errors) {
+    console.log("panda fails " + errors);
+
+  }
 
     ngAfterViewInit() {
         this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#login'), 'focus', []);
     }
-
 
     tweetLimitBlur() {
       this.tweetLow = null;
@@ -106,6 +126,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
     }
 
+
     register() {
 
         if (this.registerAccount.password !== this.confirmPassword) {
@@ -114,6 +135,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.invalidDonation = 'ERROR';
         }
         else {
+
             this.doNotMatch = null;
             this.error = null;
             this.invalidDonation = null;
@@ -121,6 +143,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.errorEmailExists = null;
             this.languageService.getCurrent().then(key => {
                 this.registerAccount.langKey = key;
+                console.log("setting token as " + this.token)
+                this.registerAccount.token = this.token;
                 this.registerService.save(this.registerAccount).subscribe(() => {
                     this.success = true;
                 }, (response) => this.processError(response));

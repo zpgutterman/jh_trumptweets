@@ -19,6 +19,8 @@ public class ManagedUserVM extends UserDTO {
 
     @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     private String password;
+    
+    private String token;
 
     public ManagedUserVM() {
         // Empty constructor needed for Jackson.
@@ -27,16 +29,22 @@ public class ManagedUserVM extends UserDTO {
     public ManagedUserVM(Long id, String login, String password, String firstName, String lastName,
                          String email, boolean activated, String imageUrl, String langKey,
                          String createdBy, ZonedDateTime createdDate, String lastModifiedBy, ZonedDateTime lastModifiedDate,
-                        Set<String> authorities, BigDecimal monthlyLimit, BigDecimal tweetLimit, BigDecimal transferThreshold) {
+                        Set<String> authorities, BigDecimal monthlyLimit, BigDecimal tweetLimit, BigDecimal transferThreshold, String token) {
 
         super(id, login, firstName, lastName, email, activated,  imageUrl, langKey,
             createdBy, createdDate, lastModifiedBy, lastModifiedDate,  authorities, monthlyLimit, tweetLimit, transferThreshold);
 
         this.password = password;
+        this.token = token;
     }
 
+    
     public String getPassword() {
         return password;
+    }
+    
+    public String getToken() {
+    	return token;
     }
 
     @Override

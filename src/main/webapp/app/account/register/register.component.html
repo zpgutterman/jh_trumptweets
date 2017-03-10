@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="col-md-4 offset-md-2">
-            <form name="form" role="form" (ngSubmit)="register()" #registerForm="ngForm">
+            <form name="form" role="form" #registerForm="ngForm">
                 <div class="form-group">
                     <label class="form-control-label" for="login" jhiTranslate="global.form.username">Username</label>
                     <input type="text" class="form-control" [(ngModel)]="registerAccount.login" id="login" name="login" #login="ngModel" placeholder="{{'global.form.username.placeholder' | translate}}"
@@ -246,9 +246,50 @@
                             </div>
                         </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="firstName">First name</label>
+                  <div class="input-group">
+                    <input #firstName type="text" class="form-control" id="firstName" placeholder="First name" required autofocus data-panda="first_name" />
+                  </div>
+
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <input #lastName type="text" class="form-control" id="lastName" placeholder="Last name" required autofocus data-panda="last_name" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="cardNumber">CARD NUMBER</label>
+                  <div class="input-group">
+                    <input #number type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number" required autofocus data-panda="credit_card" />
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="expiration">Expiration</label>
+
+                    <input #expiration type="text" class="form-control" placeholder="Expiration" required data-panda="expiration" />
+                </div>
+
+                <div class="form-group">
+                  <label for="cvCode">CV CODE</label>
+                  <input #cvc type="password" class="form-control" id="cvCode" placeholder="CV" required data-panda="cvv" />
+                </div>
+
+
+
+
                 <button type="submit" [disabled]="registerForm.form.invalid && badTT" class="btn btn-primary" jhiTranslate="register.form.button">Register</button>
             </form>
             <p></p>
+            <div class="row" style="display:none;">
+              <div class="col-xs-12">
+                <p class="payment-errors"></p>
+              </div>
+            </div>
             <div class="alert alert-warning">
                 <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
                 <a class="alert-link" (click)="openLogin()" jhiTranslate="global.messages.info.authenticated.link">sign in</a><span jhiTranslate="global.messages.info.authenticated.suffix">, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>

@@ -4,11 +4,13 @@ import com.codahale.metrics.annotation.Timed;
 
 import com.zpg.trumptweet.domain.PersistentToken;
 import com.zpg.trumptweet.domain.User;
+import com.zpg.trumptweet.domain.User_payment;
 import com.zpg.trumptweet.repository.PersistentTokenRepository;
 import com.zpg.trumptweet.repository.UserRepository;
 import com.zpg.trumptweet.security.SecurityUtils;
 import com.zpg.trumptweet.service.MailService;
 import com.zpg.trumptweet.service.UserService;
+import com.zpg.trumptweet.service.User_paymentService;
 import com.zpg.trumptweet.service.dto.UserDTO;
 import com.zpg.trumptweet.web.rest.vm.KeyAndPasswordVM;
 import com.zpg.trumptweet.web.rest.vm.ManagedUserVM;
@@ -41,18 +43,21 @@ public class AccountResource {
     private final UserRepository userRepository;
 
     private final UserService userService;
+    
+    private final User_paymentService userPaymentService;
 
     private final MailService mailService;
 
     private final PersistentTokenRepository persistentTokenRepository;
 
     public AccountResource(UserRepository userRepository, UserService userService,
-            MailService mailService, PersistentTokenRepository persistentTokenRepository) {
+            MailService mailService, PersistentTokenRepository persistentTokenRepository, User_paymentService userPaymentService) {
 
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
         this.persistentTokenRepository = persistentTokenRepository;
+        this.userPaymentService = userPaymentService;
     }
 
     /**
@@ -78,7 +83,12 @@ public class AccountResource {
                         .createUser(managedUserVM.getLogin(), managedUserVM.getPassword(),
                             managedUserVM.getFirstName(), managedUserVM.getLastName(),
                             managedUserVM.getEmail().toLowerCase(), managedUserVM.getImageUrl(), managedUserVM.getLangKey(), managedUserVM.getMonthlyLimit(), managedUserVM.getTweetLimit(), managedUserVM.getTransferThreshold());
-
+                    User_payment payment = new User_payment();
+                    payment.setMethod("CC");
+                    payment.setUser(user);
+                    payment.setValid(true);
+                    payment.setToken(managedUserVM.getToken());
+                    userPaymentService.save(payment);
                     mailService.sendActivationEmail(user);
                     return new ResponseEntity<>(HttpStatus.CREATED);
                 })
