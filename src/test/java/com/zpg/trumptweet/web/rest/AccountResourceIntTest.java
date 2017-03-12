@@ -9,6 +9,7 @@ import com.zpg.trumptweet.repository.UserRepository;
 import com.zpg.trumptweet.security.AuthoritiesConstants;
 import com.zpg.trumptweet.service.MailService;
 import com.zpg.trumptweet.service.UserService;
+import com.zpg.trumptweet.service.User_paymentService;
 import com.zpg.trumptweet.service.dto.UserDTO;
 import com.zpg.trumptweet.web.rest.vm.ManagedUserVM;
 import org.junit.Before;
@@ -54,6 +55,9 @@ public class AccountResourceIntTest {
 
     @Autowired
     private PersistentTokenRepository persistentTokenRepository;
+    
+    @Autowired
+    private User_paymentService userPaymentService;
 
     @Mock
     private UserService mockUserService;
@@ -71,10 +75,10 @@ public class AccountResourceIntTest {
         doNothing().when(mockMailService).sendActivationEmail((User) anyObject());
 
         AccountResource accountResource =
-            new AccountResource(userRepository, userService, mockMailService, persistentTokenRepository);
+            new AccountResource(userRepository, userService, mockMailService, persistentTokenRepository, userPaymentService);
 
         AccountResource accountUserMockResource =
-            new AccountResource(userRepository, mockUserService, mockMailService, persistentTokenRepository);
+            new AccountResource(userRepository, mockUserService, mockMailService, persistentTokenRepository, userPaymentService);
 
         this.restMvc = MockMvcBuilders.standaloneSetup(accountResource).build();
         this.restUserMockMvc = MockMvcBuilders.standaloneSetup(accountUserMockResource).build();

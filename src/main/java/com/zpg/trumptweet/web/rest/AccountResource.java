@@ -87,7 +87,8 @@ public class AccountResource {
                     payment.setMethod("CC");
                     payment.setUser(user);
                     payment.setValid(true);
-                    payment.setToken(managedUserVM.getToken());
+                    String token = userPaymentService.createCustomerToken(managedUserVM);
+                    payment.setToken(token);
                     userPaymentService.save(payment);
                     mailService.sendActivationEmail(user);
                     return new ResponseEntity<>(HttpStatus.CREATED);

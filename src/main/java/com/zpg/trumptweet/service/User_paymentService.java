@@ -1,9 +1,10 @@
 package com.zpg.trumptweet.service;
 
-import com.zpg.trumptweet.domain.User_payment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import java.util.List;
+
+import com.zpg.trumptweet.domain.User_payment;
+import com.zpg.trumptweet.web.rest.vm.ManagedUserVM;
 
 /**
  * Service Interface for managing User_payment.
@@ -40,4 +41,6 @@ public interface User_paymentService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+	String createCustomerToken(ManagedUserVM managedUserVM);
 }
