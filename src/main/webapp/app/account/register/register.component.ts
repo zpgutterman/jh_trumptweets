@@ -34,6 +34,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     error: string;
     token: string;
     errorEmailExists: string;
+    errorInvalidCard: string;
     errorUserExists: string;
     registerAccount: any;
     success: boolean;
@@ -68,7 +69,7 @@ this.register();
 
   handleCardTokenError(errors) {
     console.log("panda fails " + errors);
-
+    this.errorInvalidCard = 'ERROR';
   }
 
     ngAfterViewInit() {

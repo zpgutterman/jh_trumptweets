@@ -40,6 +40,18 @@ progress[value].progress-Monthly::-webkit-progress-value {
   background-color: #2e2f2f;
 }
 
+fieldset {
+    margin: 10px;
+    border: 1px solid lightgray;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+legend {
+    padding: 2px;
+    width: 42%;
+}
+
 
 
 /* ==========================================================================

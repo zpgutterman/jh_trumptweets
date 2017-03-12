@@ -1,6 +1,6 @@
 <div>
     <div class="row">
-        <div class="col-md-8 offset-md-2">
+        <div class="col-md-8 offset-md-1">
             <h1 jhiTranslate="register.title">Registration</h1>
 
             <div class="alert alert-success" *ngIf="success" jhiTranslate="register.messages.success">
@@ -27,11 +27,11 @@
                 The monthly limit must be higher than the tweet limit!
             </div>
         </div>
-        <div class="col-md-4 offset-md-2">
+        <div class="col-md-6 offset-md-1">
             <form name="form" role="form" #registerForm="ngForm">
                 <div class="form-group">
                     <label class="form-control-label" for="login" jhiTranslate="global.form.username">Username</label>
-                    <input type="text" class="form-control" [(ngModel)]="registerAccount.login" id="login" name="login" #login="ngModel" placeholder="{{'global.form.username.placeholder' | translate}}"
+                    <input type="text" class="form-control" [(ngModel)]="registerAccount.login" id="login" name="login" #login="ngModel" autofocus placeholder="{{'global.form.username.placeholder' | translate}}"
                             required minlength="1" maxlength="50" pattern="^[_'.@A-Za-z0-9-]*$">
                     <div *ngIf="login.dirty && login.invalid">
                         <small class="form-text text-danger" *ngIf="login.errors.required" jhiTranslate="register.messages.validate.login.required">
@@ -53,7 +53,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="email" jhiTranslate="global.form.email">E-mail</label>
-                    <input type="email" class="form-control" id="email" name="email" #email="ngModel" placeholder="{{'global.form.email.placeholder' | translate}}"
+                    <input type="email" class="form-control" id="email" name="email" #email="ngModel" autofocus placeholder="{{'global.form.email.placeholder' | translate}}"
                             [(ngModel)]="registerAccount.email" minlength=5 maxlength=100 required>
                     <div *ngIf="email.dirty && email.invalid">
                         <small class="form-text text-danger" *ngIf="email.errors.required"
@@ -76,7 +76,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="password" jhiTranslate="global.form.newpassword">New password</label>
-                    <input type="password" class="form-control" id="password" name="password" #password="ngModel" placeholder="{{'global.form.newpassword.placeholder' | translate}}"
+                    <input type="password" class="form-control" id="password" name="password" #password="ngModel" autofocus placeholder="{{'global.form.newpassword.placeholder' | translate}}"
                             [(ngModel)]="registerAccount.password" minlength=4 maxlength=50 required>
                     <div *ngIf="password.dirty && password.invalid">
                         <small class="form-text text-danger" *ngIf="password.errors.required"
@@ -96,7 +96,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="confirmPassword" jhiTranslate="global.form.confirmpassword">New password confirmation</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" #confirmPasswordInput="ngModel" placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" #confirmPasswordInput="ngModel" autofocus placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"
                             [(ngModel)]="confirmPassword" minlength=4 maxlength=50 required>
                     <div *ngIf="confirmPasswordInput.dirty && confirmPasswordInput.invalid">
                         <small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.required"
@@ -246,22 +246,34 @@
                             </div>
                         </div>
                 </div>
-
+                <fieldset>
+                  <legend>Payment Details</legend>
                 <div class="form-group">
-                  <label for="firstName">First name</label>
-                  <div class="input-group">
-                    <input #firstName type="text" class="form-control" id="firstName" placeholder="First name" required autofocus data-panda="first_name" />
-                  </div>
+                  <label class="form-control-label" for="firstName">First name</label>
+
+                    <input #firstName="ngModel" [(ngModel)]="registerAccount.firstName" type="text" class="form-control" id="firstName" name="firstName" placeholder="First name" required minlength=2 autofocus data-panda="first_name" />
+                    <div *ngIf="firstName.dirty && firstName.invalid">
+                        <small class="form-text text-danger" *ngIf="firstName.errors.required">
+                            Your first name is required.
+                        </small>
+                    </div>
+
 
                 </div>
                 <div class="form-group">
-                  <div class="input-group">
-                    <input #lastName type="text" class="form-control" id="lastName" placeholder="Last name" required autofocus data-panda="last_name" />
-                  </div>
+                  <label class="form-control-label" for="lastName">Last name</label>
+                    <input #lastName="ngModel" [(ngModel)]="registerAccount.lastName" type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name" required autofocus data-panda="last_name" />
+                    <div *ngIf="lastName.dirty && lastName.invalid">
+                        <small class="form-text text-danger" *ngIf="firstName.errors.required">
+                            Your first name is required.
+                        </small>
+                    </div>
                 </div>
-
+                <div class="alert alert-danger" *ngIf="errorInvalidCard">
+                    <strong>Invalid Credit Card information.</strong> Please verify your details.
+                </div>
                 <div class="form-group">
-                  <label for="cardNumber">CARD NUMBER</label>
+                  <label for="cardNumber">Card Number</label>
                   <div class="input-group">
                     <input #number type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number" required autofocus data-panda="credit_card" />
                     <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
@@ -271,14 +283,14 @@
                 <div class="form-group">
                   <label for="expiration">Expiration</label>
 
-                    <input #expiration type="text" class="form-control" placeholder="Expiration" required data-panda="expiration" />
+                    <input #expiration type="text" class="form-control" placeholder="MM/YYYY" required data-panda="expiration" />
                 </div>
 
                 <div class="form-group">
-                  <label for="cvCode">CV CODE</label>
+                  <label for="cvCode">CV Code</label>
                   <input #cvc type="password" class="form-control" id="cvCode" placeholder="CV" required data-panda="cvv" />
                 </div>
-
+              </fieldset>
 
 
 
