@@ -111,21 +111,22 @@ public class User_balancesResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(user_balances));
     }
     
-    /**
-     * GET  /user-balances/user/ : get all of the user_balances for a user.
-     *
-     * @param id the id of the user to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the user_balances, or with status 404 (Not Found)
-     * @throws URISyntaxException 
-     */
-    @GetMapping("/ub-user/")
-    @Timed
-    public ResponseEntity<List<User_balances>> getBalanceByUser() {
-        log.debug("REST request to get User_balances for user : {}");
-        List<User_balances> result = user_balancesService.findByCurrentUser();
-        log.debug(result.toString());
-        return new ResponseEntity<List<User_balances>>(result, HttpStatus.OK);
-    }
+        
+        /**
+         * GET  /user-balances/user/ : get all of the user_balances for a user.
+         *
+         * @param id the id of the user to retrieve
+         * @return the ResponseEntity with status 200 (OK) and with body the user_balances, or with status 404 (Not Found)
+         * @throws URISyntaxException 
+         */
+        @GetMapping("/ub-user/")
+        @Timed
+        public ResponseEntity<List<User_balances>> getBalanceByUser() {
+            log.debug("REST request to get User_balances for user : {}");
+            List<User_balances> result = user_balancesService.findByCurrentUser();
+            log.debug(result.toString());
+            return new ResponseEntity<List<User_balances>>(result, HttpStatus.OK);
+        }
 
     /**
      * DELETE  /user-balances/:id : delete the "id" user_balances.

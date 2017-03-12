@@ -6,6 +6,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -31,6 +33,13 @@ public class User_balances implements Serializable {
 
     @ManyToOne
     private Category category;
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "user_balances_user_tweet_log",
+               joinColumns = @JoinColumn(name="user_balances_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="user_tweet_logs_id", referencedColumnName="id"))
+    private Set<User_tweet_log> user_tweet_logs = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -77,6 +86,31 @@ public class User_balances implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Set<User_tweet_log> getUser_tweet_logs() {
+        return user_tweet_logs;
+    }
+
+    public User_balances user_tweet_logs(Set<User_tweet_log> user_tweet_logs) {
+        this.user_tweet_logs = user_tweet_logs;
+        return this;
+    }
+
+    public User_balances addUser_tweet_log(User_tweet_log user_tweet_log) {
+        this.user_tweet_logs.add(user_tweet_log);
+        user_tweet_log.getUser_balances().add(this);
+        return this;
+    }
+
+    public User_balances removeUser_tweet_log(User_tweet_log user_tweet_log) {
+        this.user_tweet_logs.remove(user_tweet_log);
+        user_tweet_log.getUser_balances().remove(this);
+        return this;
+    }
+
+    public void setUser_tweet_logs(Set<User_tweet_log> user_tweet_logs) {
+        this.user_tweet_logs = user_tweet_logs;
     }
 
     @Override

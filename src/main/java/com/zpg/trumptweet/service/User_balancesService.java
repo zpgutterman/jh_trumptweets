@@ -50,19 +50,6 @@ public class User_balancesService {
         Page<User_balances> result = user_balancesRepository.findAll(pageable);
         return result;
     }
-    
-    /**
-     *  Get all the user_balances by user ID.
-     *  
-     *  @param pageable the pagination information
-     *  @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public List<User_balances> findByCurrentUser() {
-    	List<User_balances> result = user_balancesRepository.findByUserIsCurrentUser();
-    	log.debug("****USER BALANCES" + result.get(0).toString());
-        return result;
-    }
 
     /**
      *  Get one user_balances by id.
@@ -73,9 +60,22 @@ public class User_balancesService {
     @Transactional(readOnly = true)
     public User_balances findOne(Long id) {
         log.debug("Request to get User_balances : {}", id);
-        User_balances user_balances = user_balancesRepository.findOne(id);
+        User_balances user_balances = user_balancesRepository.findOneWithEagerRelationships(id);
         return user_balances;
     }
+    
+        /**
+         *  Get all the user_balances by user ID.
+         *  
+         *  @param pageable the pagination information
+         *  @return the list of entities
+         */
+        @Transactional(readOnly = true)
+        public List<User_balances> findByCurrentUser() {
+           List<User_balances> result = user_balancesRepository.findByUserIsCurrentUser();
+           log.debug("****USER BALANCES" + result.get(0).toString());
+            return result;
+        }
 
     /**
      *  Delete the  user_balances by id.

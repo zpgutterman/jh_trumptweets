@@ -10,6 +10,7 @@ import { User_tweet_logPopupService } from './user-tweet-log-popup.service';
 import { User_tweet_logService } from './user-tweet-log.service';
 import { User, UserService } from '../../shared';
 import { Tweetlog, TweetlogService } from '../tweetlog';
+import { User_balances, User_balancesService } from '../user-balances';
 @Component({
     selector: 'jhi-user-tweet-log-dialog',
     templateUrl: './user-tweet-log-dialog.component.html'
@@ -23,6 +24,8 @@ export class User_tweet_logDialogComponent implements OnInit {
     users: User[];
 
     tweetlogs: Tweetlog[];
+
+    user_balances: User_balances[];
     constructor(
         public activeModal: NgbActiveModal,
         private jhiLanguageService: JhiLanguageService,
@@ -30,6 +33,7 @@ export class User_tweet_logDialogComponent implements OnInit {
         private user_tweet_logService: User_tweet_logService,
         private userService: UserService,
         private tweetlogService: TweetlogService,
+        private user_balancesService: User_balancesService,
         private eventManager: EventManager
     ) {
         this.jhiLanguageService.setLocations(['user_tweet_log']);
@@ -42,6 +46,8 @@ export class User_tweet_logDialogComponent implements OnInit {
             (res: Response) => { this.users = res.json(); }, (res: Response) => this.onError(res.json()));
         this.tweetlogService.query().subscribe(
             (res: Response) => { this.tweetlogs = res.json(); }, (res: Response) => this.onError(res.json()));
+        this.user_balancesService.query().subscribe(
+            (res: Response) => { this.user_balances = res.json(); }, (res: Response) => this.onError(res.json()));
     }
     clear () {
         this.activeModal.dismiss('cancel');
@@ -79,6 +85,21 @@ export class User_tweet_logDialogComponent implements OnInit {
 
     trackTweetlogById(index: number, item: Tweetlog) {
         return item.id;
+    }
+
+    trackUser_balancesById(index: number, item: User_balances) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
 }
 

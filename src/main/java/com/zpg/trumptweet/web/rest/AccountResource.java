@@ -89,7 +89,7 @@ public class AccountResource {
                     payment.setValid(true);
                     String token = userPaymentService.createCustomerToken(managedUserVM);
                     if (token == null || token.equals("")){
-                    	return new ResponseEntity<>("e-mail address already in use", textPlainHeaders, HttpStatus.BAD_REQUEST);
+                    	return new ResponseEntity<>("Failed creating PandaPay customer", textPlainHeaders, HttpStatus.BAD_REQUEST);
                     }
                     payment.setToken(token);
                     userPaymentService.save(payment);

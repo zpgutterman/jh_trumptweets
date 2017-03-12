@@ -1,11 +1,14 @@
 package com.zpg.trumptweet.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -31,6 +34,11 @@ public class User_tweet_log implements Serializable {
 
     @ManyToOne
     private Tweetlog tweet;
+
+    @ManyToMany(mappedBy = "user_tweet_logs")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<User_balances> user_balances = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -77,6 +85,31 @@ public class User_tweet_log implements Serializable {
 
     public void setTweet(Tweetlog tweetlog) {
         this.tweet = tweetlog;
+    }
+
+    public Set<User_balances> getUser_balances() {
+        return user_balances;
+    }
+
+    public User_tweet_log user_balances(Set<User_balances> user_balances) {
+        this.user_balances = user_balances;
+        return this;
+    }
+
+    public User_tweet_log addUser_balances(User_balances user_balances) {
+        this.user_balances.add(user_balances);
+        user_balances.getUser_tweet_logs().add(this);
+        return this;
+    }
+
+    public User_tweet_log removeUser_balances(User_balances user_balances) {
+        this.user_balances.remove(user_balances);
+        user_balances.getUser_tweet_logs().remove(this);
+        return this;
+    }
+
+    public void setUser_balances(Set<User_balances> user_balances) {
+        this.user_balances = user_balances;
     }
 
     @Override

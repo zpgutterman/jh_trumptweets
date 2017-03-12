@@ -18,7 +18,8 @@
             },
             "balance": "Balance",
             "user": "User",
-            "category": "Category"
+            "category": "Category",
+            "user_tweet_log": "User Tweet Log"
         }
     }
 }

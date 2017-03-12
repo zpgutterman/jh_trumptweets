@@ -18,7 +18,8 @@
             },
             "charge": "Charge",
             "user": "User",
-            "tweet": "Tweet"
+            "tweet": "Tweet",
+            "user_balances": "User Balances"
         }
     }
 }

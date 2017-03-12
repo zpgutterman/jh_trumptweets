@@ -14,6 +14,14 @@
             "otherEntityName": "category",
             "relationshipType": "many-to-one",
             "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "user_tweet_log",
+            "otherEntityName": "user_tweet_log",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "tweet_id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "user_balances"
         }
     ],
     "fields": [

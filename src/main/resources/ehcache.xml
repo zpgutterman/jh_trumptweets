@@ -56,5 +56,9 @@
 
     <cache alias="com.zpg.trumptweet.domain.User_payment" uses-template="simple"/>
 
+    <cache alias="com.zpg.trumptweet.domain.User_tweet_log.user_balances" uses-template="simple"/>
+
+    <cache alias="com.zpg.trumptweet.domain.User_balances.user_tweet_logs" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>
