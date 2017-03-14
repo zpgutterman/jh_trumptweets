@@ -74,6 +74,12 @@
                 This field is required.
             </small>
         </div>
+        <div class="form-group">
+            <label jhiTranslate="trumptweetApp.donation_log.user_tweet_log" for="field_user_tweet_log">User Tweet Log</label>
+            <select class="form-control" id="field_user_tweet_log" #user_tweet_log="ngModel" multiple name="user_tweet_log" [(ngModel)]="donation_log.user_tweet_logs">
+                <option [ngValue]="getSelected(donation_log.user_tweet_logs, user_tweet_logOption)" *ngFor="let user_tweet_logOption of user_tweet_logs; trackBy: trackUser_tweet_logById">{{user_tweet_logOption.id}}</option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">

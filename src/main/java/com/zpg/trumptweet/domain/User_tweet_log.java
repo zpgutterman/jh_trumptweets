@@ -40,6 +40,11 @@ public class User_tweet_log implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<User_balances> user_balances = new HashSet<>();
 
+    @ManyToMany(mappedBy = "user_tweet_logs")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Donation_log> donation_logs = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -110,6 +115,31 @@ public class User_tweet_log implements Serializable {
 
     public void setUser_balances(Set<User_balances> user_balances) {
         this.user_balances = user_balances;
+    }
+
+    public Set<Donation_log> getDonation_logs() {
+        return donation_logs;
+    }
+
+    public User_tweet_log donation_logs(Set<Donation_log> donation_logs) {
+        this.donation_logs = donation_logs;
+        return this;
+    }
+
+    public User_tweet_log addDonation_log(Donation_log donation_log) {
+        this.donation_logs.add(donation_log);
+        donation_log.getUser_tweet_logs().add(this);
+        return this;
+    }
+
+    public User_tweet_log removeDonation_log(Donation_log donation_log) {
+        this.donation_logs.remove(donation_log);
+        donation_log.getUser_tweet_logs().remove(this);
+        return this;
+    }
+
+    public void setDonation_logs(Set<Donation_log> donation_logs) {
+        this.donation_logs = donation_logs;
     }
 
     @Override

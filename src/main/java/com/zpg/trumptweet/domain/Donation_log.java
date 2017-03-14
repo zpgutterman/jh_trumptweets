@@ -8,6 +8,8 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -31,7 +33,7 @@ public class Donation_log implements Serializable {
     private BigDecimal amount;
 
     @Column(name = "processed")
-    private Boolean processed = false;
+    private Boolean processed;
 
     @Column(name = "processed_date")
     private ZonedDateTime processed_date;
@@ -43,6 +45,13 @@ public class Donation_log implements Serializable {
     @ManyToOne(optional = false)
     @NotNull
     private Category category;
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "donation_log_user_tweet_log",
+               joinColumns = @JoinColumn(name="donation_logs_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="user_tweet_logs_id", referencedColumnName="id"))
+    private Set<User_tweet_log> user_tweet_logs = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -115,6 +124,31 @@ public class Donation_log implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Set<User_tweet_log> getUser_tweet_logs() {
+        return user_tweet_logs;
+    }
+
+    public Donation_log user_tweet_logs(Set<User_tweet_log> user_tweet_logs) {
+        this.user_tweet_logs = user_tweet_logs;
+        return this;
+    }
+
+    public Donation_log addUser_tweet_log(User_tweet_log user_tweet_log) {
+        this.user_tweet_logs.add(user_tweet_log);
+        user_tweet_log.getDonation_logs().add(this);
+        return this;
+    }
+
+    public Donation_log removeUser_tweet_log(User_tweet_log user_tweet_log) {
+        this.user_tweet_logs.remove(user_tweet_log);
+        user_tweet_log.getDonation_logs().remove(this);
+        return this;
+    }
+
+    public void setUser_tweet_logs(Set<User_tweet_log> user_tweet_logs) {
+        this.user_tweet_logs = user_tweet_logs;
     }
 
     @Override

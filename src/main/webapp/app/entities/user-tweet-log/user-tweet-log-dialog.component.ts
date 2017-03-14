@@ -11,6 +11,7 @@ import { User_tweet_logService } from './user-tweet-log.service';
 import { User, UserService } from '../../shared';
 import { Tweetlog, TweetlogService } from '../tweetlog';
 import { User_balances, User_balancesService } from '../user-balances';
+import { Donation_log, Donation_logService } from '../donation-log';
 @Component({
     selector: 'jhi-user-tweet-log-dialog',
     templateUrl: './user-tweet-log-dialog.component.html'
@@ -26,6 +27,8 @@ export class User_tweet_logDialogComponent implements OnInit {
     tweetlogs: Tweetlog[];
 
     user_balances: User_balances[];
+
+    donation_logs: Donation_log[];
     constructor(
         public activeModal: NgbActiveModal,
         private jhiLanguageService: JhiLanguageService,
@@ -34,6 +37,7 @@ export class User_tweet_logDialogComponent implements OnInit {
         private userService: UserService,
         private tweetlogService: TweetlogService,
         private user_balancesService: User_balancesService,
+        private donation_logService: Donation_logService,
         private eventManager: EventManager
     ) {
         this.jhiLanguageService.setLocations(['user_tweet_log']);
@@ -48,6 +52,8 @@ export class User_tweet_logDialogComponent implements OnInit {
             (res: Response) => { this.tweetlogs = res.json(); }, (res: Response) => this.onError(res.json()));
         this.user_balancesService.query().subscribe(
             (res: Response) => { this.user_balances = res.json(); }, (res: Response) => this.onError(res.json()));
+        this.donation_logService.query().subscribe(
+            (res: Response) => { this.donation_logs = res.json(); }, (res: Response) => this.onError(res.json()));
     }
     clear () {
         this.activeModal.dismiss('cancel');
@@ -88,6 +94,10 @@ export class User_tweet_logDialogComponent implements OnInit {
     }
 
     trackUser_balancesById(index: number, item: User_balances) {
+        return item.id;
+    }
+
+    trackDonation_logById(index: number, item: Donation_log) {
         return item.id;
     }
 

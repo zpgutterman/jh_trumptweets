@@ -26,6 +26,12 @@
                 <a [routerLink]="['category', donation_log.category?.id]">{{donation_log.category?.name}}</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="trumptweetApp.donation_log.user_tweet_log">User Tweet Log</span></dt>
+        <dd>
+            <span *ngFor="let user_tweet_log of donation_log.user_tweet_logs; let last = last">
+                <a [routerLink]="['/user-tweet-log', user_tweet_log?.id ]">{{user_tweet_log.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
     </dl>
 
     <button type="submit"

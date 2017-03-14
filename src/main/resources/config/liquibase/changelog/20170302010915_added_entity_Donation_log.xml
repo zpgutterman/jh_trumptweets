@@ -45,5 +45,7 @@
         </createTable>
         <dropDefaultValue tableName="donation_log" columnName="processed_date" columnDataType="datetime"/>
         
+        
+        
     </changeSet>
 </databaseChangeLog>

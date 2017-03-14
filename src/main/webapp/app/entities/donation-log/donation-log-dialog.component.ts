@@ -10,6 +10,7 @@ import { Donation_logPopupService } from './donation-log-popup.service';
 import { Donation_logService } from './donation-log.service';
 import { User, UserService } from '../../shared';
 import { Category, CategoryService } from '../category';
+import { User_tweet_log, User_tweet_logService } from '../user-tweet-log';
 @Component({
     selector: 'jhi-donation-log-dialog',
     templateUrl: './donation-log-dialog.component.html'
@@ -23,6 +24,8 @@ export class Donation_logDialogComponent implements OnInit {
     users: User[];
 
     categories: Category[];
+
+    user_tweet_logs: User_tweet_log[];
     constructor(
         public activeModal: NgbActiveModal,
         private jhiLanguageService: JhiLanguageService,
@@ -30,6 +33,7 @@ export class Donation_logDialogComponent implements OnInit {
         private donation_logService: Donation_logService,
         private userService: UserService,
         private categoryService: CategoryService,
+        private user_tweet_logService: User_tweet_logService,
         private eventManager: EventManager
     ) {
         this.jhiLanguageService.setLocations(['donation_log']);
@@ -42,6 +46,8 @@ export class Donation_logDialogComponent implements OnInit {
             (res: Response) => { this.users = res.json(); }, (res: Response) => this.onError(res.json()));
         this.categoryService.query().subscribe(
             (res: Response) => { this.categories = res.json(); }, (res: Response) => this.onError(res.json()));
+        this.user_tweet_logService.query().subscribe(
+            (res: Response) => { this.user_tweet_logs = res.json(); }, (res: Response) => this.onError(res.json()));
     }
     clear () {
         this.activeModal.dismiss('cancel');
@@ -79,6 +85,21 @@ export class Donation_logDialogComponent implements OnInit {
 
     trackCategoryById(index: number, item: Category) {
         return item.id;
+    }
+
+    trackUser_tweet_logById(index: number, item: User_tweet_log) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
 }
 

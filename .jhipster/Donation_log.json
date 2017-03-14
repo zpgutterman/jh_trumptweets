@@ -20,6 +20,14 @@
                 "required"
             ],
             "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "user_tweet_log",
+            "otherEntityName": "user_tweet_log",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "donation_log"
         }
     ],
     "fields": [

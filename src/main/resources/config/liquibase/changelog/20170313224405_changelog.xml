@@ -1,0 +1,31 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="zpgutterman (generated)" id="create-userbalance-relationship">
+    	 <preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="donation_log_user_tweet_log"/>
+			</not>
+		</preConditions>
+    	 <createTable tableName="donation_log_user_tweet_log">
+            <column name="user_tweet_logs_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="donation_logs_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="donation_logs_id, user_tweet_logs_id" tableName="donation_log_user_tweet_log"/>
+    
+    	 <addForeignKeyConstraint baseColumnNames="donation_logs_id"
+                                 baseTableName="donation_log_user_tweet_log"
+                                 constraintName="fk_donation_log_user_tweet_log_donation_logs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="donation_log"/>
+        <addForeignKeyConstraint baseColumnNames="user_tweet_logs_id"
+                                 baseTableName="donation_log_user_tweet_log"
+                                 constraintName="fk_donation_log_user_tweet_log_user_tweet_logs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_tweet_log"/>
+    </changeSet>
+</databaseChangeLog>

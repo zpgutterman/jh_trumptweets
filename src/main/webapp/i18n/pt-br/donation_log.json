@@ -20,7 +20,8 @@
             "processed": "Processed",
             "processed_date": "Processed Date",
             "user": "User",
-            "category": "Category"
+            "category": "Category",
+            "user_tweet_log": "User Tweet Log"
         }
     }
 }

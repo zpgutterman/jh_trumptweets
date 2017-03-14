@@ -19,7 +19,8 @@
             "charge": "Charge",
             "user": "User",
             "tweet": "Tweet",
-            "user_balances": "User Balances"
+            "user_balances": "User Balances",
+            "donation_log": "Donation Log"
         }
     }
 }

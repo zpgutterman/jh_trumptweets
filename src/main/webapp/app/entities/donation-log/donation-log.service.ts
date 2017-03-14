@@ -40,7 +40,14 @@ export class Donation_logService {
         });
     }
 
-    findTotalUser(): Observable<number> {
+    query(req?: any): Observable<Response> {
+        let options = this.createRequestOption(req);
+        return this.http.get(this.resourceUrl, options)
+            .map((res: any) => this.convertResponse(res))
+        ;
+    }
+
+        findTotalUser(): Observable<number> {
         return this.http.get(`${this.totalUrl}`).map((res: Response) => {
             let jsonResponse = res.json();
             return jsonResponse;
@@ -63,12 +70,6 @@ export class Donation_logService {
       });
     }
 
-    query(req?: any): Observable<Response> {
-        let options = this.createRequestOption(req);
-        return this.http.get(this.resourceUrl, options)
-            .map((res: any) => this.convertResponse(res))
-        ;
-    }
 
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);

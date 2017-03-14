@@ -21,6 +21,13 @@
             "relationshipType": "many-to-many",
             "ownerSide": false,
             "otherEntityRelationshipName": "user_tweet_log"
+        },
+        {
+            "relationshipName": "donation_log",
+            "otherEntityName": "donation_log",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "user_tweet_log"
         }
     ],
     "fields": [
