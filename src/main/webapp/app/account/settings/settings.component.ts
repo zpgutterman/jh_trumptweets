@@ -11,6 +11,7 @@ import { Response } from '@angular/http';
 })
 export class SettingsComponent implements OnInit {
     error: string;
+    lastFour: string;
     success: string;
     settingsAccount: any;
     user_preferences: User_preferences;
@@ -36,6 +37,7 @@ export class SettingsComponent implements OnInit {
         this.principal.identity().then((account) => {
             this.settingsAccount = this.copyAccount(account);
             this.loadPref();
+            this.loadCC();
         });
         this.languageHelper.getAll().then((languages) => {
             this.languages = languages;
@@ -69,6 +71,15 @@ export class SettingsComponent implements OnInit {
         this.onError(error);
     }
 
+    loadCC() {
+      this.upService.getLastFourCC()
+                        .subscribe(
+                            lastFour => this.lastFour = lastFour, //Bind to view
+                             err => {
+                                 // Log errors if any
+                                 console.log(err);
+                             });
+    }
 
     loadPref() {
        // Get all comments

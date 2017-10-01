@@ -43,4 +43,6 @@ public interface User_paymentService {
     void delete(Long id);
 
 	String createCustomerToken(ManagedUserVM managedUserVM);
+
+	String findLastFourByCurrentUser();
 }

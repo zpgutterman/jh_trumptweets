@@ -87,6 +87,7 @@ public class AccountResource {
                     payment.setMethod("CC");
                     payment.setUser(user);
                     payment.setValid(true);
+                    payment.setLastFour(managedUserVM.getToken()); //This is the CC token, not the customer token. Used to get the last 4 digits of the card
                     String token = userPaymentService.createCustomerToken(managedUserVM);
                     if (token == null || token.equals("")){
                     	return new ResponseEntity<>("Failed creating PandaPay customer", textPlainHeaders, HttpStatus.BAD_REQUEST);

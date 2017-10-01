@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -111,6 +113,25 @@ public class User_paymentResource {
         User_payment user_payment = user_paymentService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(user_payment));
     }
+    
+    
+	/**
+	 * GET /last-four/ : get the last four.
+	 *
+	 * @param id
+	 *            the id of the donation_log to retrieve
+	 * @return the ResponseEntity with status 200 (OK) and with body the
+	 *         donation_log, or with status 404 (Not Found)
+	 */
+	@GetMapping("/lastFour")
+	@Timed
+	public ResponseEntity<String> getLastFourCurrentUser() {
+		log.debug("REST request to get last four digits of CC");
+		String lastFour = user_paymentService.findLastFourByCurrentUser();
+		log.debug("last four value" + lastFour);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(lastFour));
+	}
+
 
     /**
      * DELETE  /user-payments/:id : delete the "id" user_payment.

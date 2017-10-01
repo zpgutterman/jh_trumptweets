@@ -8,6 +8,7 @@ export class User_preferencesService {
 
     private resourceUrl = 'api/user-preferences';
     private up = 'api/up/';
+    private lastFour = 'api/lastFour/';
 
     constructor(private http: Http) { }
 
@@ -37,6 +38,15 @@ export class User_preferencesService {
             return res.json();
         });
     }
+
+    getLastFourCC(): Observable<string> {
+    return this.http.get(`${this.lastFour}`).map((res: Response) => {
+        let jsonResponse = res.json();
+        console.log("response " + res.json());
+        return jsonResponse;
+    });
+}
+
 
     query(req?: any): Observable<Response> {
         let options = this.createRequestOption(req);

@@ -15,6 +15,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -127,6 +128,7 @@ public class User_paymentServiceImpl implements User_paymentService{
 		
 		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
 		urlParameters.add(new BasicNameValuePair("email", managedUserVM.getEmail()));
+		log.debug("user token is " + managedUserVM.getToken() + "and email is " + managedUserVM.getEmail());
 		urlParameters.add(new BasicNameValuePair("source", managedUserVM.getToken()));
 		
 		try {
@@ -182,5 +184,78 @@ public class User_paymentServiceImpl implements User_paymentService{
 		customerID = (String) jsonObject.get("id");
 
 		return customerID;
+	}
+
+	@Override
+	public String findLastFourByCurrentUser() {
+		List<User_payment> userPayments = user_paymentRepository.findByUserIsCurrentUser();
+		log.debug("payment size is" + userPayments.size());
+		//This is a list implementation, but we don't handle multiple cards yet. Just take the first one for now.
+		//TODO handle multi payments
+		User_payment foundPayment = null;
+		if (userPayments != null && userPayments.size() > 0) {
+			foundPayment = userPayments.get(0);
+			log.debug("found the payment for the user:" + foundPayment.getToken());
+		}
+		String cardToken = foundPayment.getToken();
+		String url = "https://api.pandapay.io/v1/customers/" + cardToken;
+		log.debug("the url generated " + url);
+		String privateKey=env.getProperty("application.pandapay-sk");
+		CredentialsProvider provider = new BasicCredentialsProvider();
+		UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(privateKey, "");
+		provider.setCredentials(AuthScope.ANY, credentials);
+		  
+		HttpClient client = HttpClientBuilder.create()
+		  .setDefaultCredentialsProvider(provider)
+		  .build();
+		HttpGet request = new HttpGet(url);
+		HttpResponse response = null;
+		try {
+			response = client.execute(request);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		BufferedReader rd = null;
+		try {
+			rd = new BufferedReader(
+			        new InputStreamReader(response.getEntity().getContent()));
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		StringBuffer result = new StringBuffer();
+		String line = "";
+		try {
+			while ((line = rd.readLine()) != null) {
+				result.append(line);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		String data = result.toString();
+		
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObject = null;
+
+			try {
+				jsonObject = (JSONObject) parser.parse(data);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+      
+		String lastFour = "";
+		lastFour = (String) jsonObject.get("last4");
+
+		return lastFour;
+		
 	}
 }
