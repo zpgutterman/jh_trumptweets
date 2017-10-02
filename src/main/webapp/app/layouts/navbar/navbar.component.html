@@ -5,8 +5,10 @@
         </a>
         <a class="navbar-brand logo float-xs-right" routerLink="/" (click)="collapseNavbar()">
 
-            <span class="navbar-title">Resist¢ents</span> <span class="navbar-version">{{version}}</span>
+            <span class="navbar-title">RESIST¢ENTS</span> <span class="navbar-version">{{version}}</span>
         </a>
+         <br/>
+            <hr/>
     </div>
     <div class="collapse navbar-toggleable-md float-lg-right" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
         <ul class="nav navbar-nav float-lg-right">
@@ -207,5 +209,7 @@
                 </ul>
             </li>
         </ul>
+
     </div>
+
 </nav>

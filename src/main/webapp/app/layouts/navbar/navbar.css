@@ -3,12 +3,19 @@ Navbar
 ========================================================================== */
 .navbar-version {
     font-size: 10px;
-    color: #ccc
+    color: black;
 }
 
 .jh-navbar {
-    background-color: #484747;
+    background-color: #FFFFFF;
+    color: black;
     padding: .2em 1em;
+    border-color:(0,0,0,0.14);
+
+}
+
+hr {
+      margin-top: 2rem;
 }
 
 .jh-navbar .profile-image {
@@ -36,16 +43,17 @@ Navbar
 
 .jh-navbar a.nav-link {
     font-weight: 400;
+    color:black;
 }
 
 .jh-navbar .jh-navbar-toggler {
-    color: #ccc;
+    color: black;
     font-size: 1.5em;
     padding: 10px;
 }
 
 .jh-navbar .jh-navbar-toggler:hover {
-    color: #fff;
+    color: black;
 }
 
 
@@ -59,7 +67,10 @@ Navbar
 .navbar-title {
     display: inline-block;
     vertical-align: middle;
-    font-weight: lighter;
+    font-weight: 500;
+    letter-spacing: 6px;
+    font-size: 30px;
+    color:#423d3d;
 }
 
 /* ==========================================================================

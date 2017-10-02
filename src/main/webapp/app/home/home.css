@@ -30,7 +30,7 @@ only screen and (                min-resolution: 2dppx) {
 }
 
 .user-info {
-  width: 30%;
+  width: 20%;
 }
 
 .pending-transactions {
@@ -47,7 +47,8 @@ only screen and (                min-resolution: 2dppx) {
 }
 
 .editDonation {
-  float: right;
+padding: 5px;
+font-size: 70%;
 }
 
 .totalDonation {

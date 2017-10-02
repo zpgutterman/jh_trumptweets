@@ -1,6 +1,4 @@
 <div class="row">
-  <h1 class="display-4">Resist¢ents</h1>
-  <p class="lead" jhiTranslate="home.subtitle">Put your money where his mouth is.</p>
     <div class="col-lg-6 user-info">
 
 
@@ -25,10 +23,10 @@
             </div>
         <div *ngSwitchCase="true">
 
-          <span class="editDonation"><a routerLink="donation-settings">Edit</a></span>
+
           <span>Per Tweet:</span>
           <br />
-          <span class="perTweetAmount" *ngIf="account">{{account.tweetLimit | currency:'USD':true:'1.2-2'}}</span>
+          <span class="perTweetAmount" *ngIf="account">{{account.tweetLimit | currency:'USD':true:'1.2-2'}}</span><span class="editDonation"><a routerLink="donation-settings">Edit</a></span>
 
 
         </div>
