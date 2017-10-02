@@ -33,7 +33,7 @@ progress[value].progress-Environment::-webkit-progress-value {
 }
 
 progress[value].progress-Civil::-webkit-progress-value {
-  background-color: #e9ef9b;
+  background-color: #bec756;
 }
 
 progress[value].progress-Monthly::-webkit-progress-value {
@@ -131,6 +131,10 @@ make sure browsers use the pointer cursor for anchors, even with no href
 ========================================================================== */
 a:hover {
   cursor: pointer;
+}
+
+a {
+  color:black;
 }
 
 .hand {

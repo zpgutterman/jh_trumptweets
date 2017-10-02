@@ -29,6 +29,10 @@ only screen and (                min-resolution: 2dppx) {
   padding-left: 0;
 }
 
+.page {
+  background-color:black;
+}
+
 .user-info {
   width: 20%;
 }
@@ -40,6 +44,8 @@ only screen and (                min-resolution: 2dppx) {
 .handle {
   font-weight: bold;
 }
+
+
 
 .user-name {
   font-weight: lighter;
@@ -64,24 +70,24 @@ font-size: 70%;
 .tweetCell {
 
 }
-.Environment {
-  background-color: #7cbd7c;
+.handleEnvironment {
+  color: #7cbd7c;
 }
 
-.Healthcare {
-  background-color: #ff9393;
+.handleHealthcare {
+  color: #ff9393;
 }
 
 .Health {
-  background-color: #ffdab9;
+  color: #ffdab9;
 }
 
-.Civil {
-  background-color: #e9ef9b;
+.handleCivil {
+  color: #bec756;
 }
 
-.Immigration {
-  background-color: #adddec;
+.handleImmigration {
+  color: #adddec;
 }
 
 .tweetDate{
@@ -113,7 +119,6 @@ font-size: 70%;
 
 }
 .table-curved td, .table-curved th {
-  border-top: none;
 }
 .table-curved > :first-child > :first-child > :first-child {
     border-radius: 6px 0 0 0;
