@@ -69,23 +69,21 @@
     <div class="col-lg-8 recent-tweets">
       <div [ngSwitch]="isAuthenticated()">
         <div *ngSwitchCase="true">
-          <div class="table-responsive" *ngIf="tweetlogs">
-              <table class="table tweetTable table-curved">
 
-                  <tbody>
-                  <tr class="tweetRow" *ngFor="let tweetlog of tweetlogs ;trackBy: trackId">
-                    <td class="categoryCell">
-                      <ul class="categoryTweetList">
-                      <li *ngFor="let category of tweetlog.categories">{{category.name}}</li>
-                    </ul>
+          <div class="tweetList" *ngIf="tweetlogs">
+              <ul class="tweetTableList">
+                <li class="tweetListRow" *ngFor="let tweetlog of tweetlogs ;trackBy: trackId">
 
-                    </td>
-                      <td class="tweetCell"><span class="handle{{tweetlog.categories[0].name}}">@{{tweetlog.handle}}</span> {{tweetlog.tweet}} <span class="tweetDate">{{tweetlog.tweet_date | date:'short'}}</span></td>
+                      <ul class="categoryTweetListRow">
+                        <li class="categoryTweetListItem" *ngFor="let category of tweetlog.categories">{{category.name}}</li>
+                      </ul>
 
 
-                  </tr>
-                  </tbody>
-              </table>
+                      <span class="handle{{tweetlog.categories[0].name}}">@{{tweetlog.handle}}</span> <span class="fullTweet"> {{tweetlog.tweet}} </span>
+                      <br />
+                      <span class="tweetDate">{{tweetlog.tweet_date | date:'short'}}</span>
+                </li>
+              </ul>
           </div>
           <div class="text-xs-center recent-tweets" *ngIf="tweetlogs">
               <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>

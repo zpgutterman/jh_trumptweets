@@ -33,6 +33,29 @@ only screen and (                min-resolution: 2dppx) {
   background-color:black;
 }
 
+.tweetListRow {
+      border: 1px solid #d3d3d3;
+      border-radius: 3px;
+      padding: 20px;
+      min-height: 96px;
+      margin: 15px 0;
+      background: rgb(249, 249, 249);
+
+}
+
+.categoryTweetListItem {
+  margin-left: -39px;
+}
+
+.tweetTableList {
+  list-style: none;
+}
+
+.categoryTweetListRow {
+  list-style: none;
+}
+
+
 .user-info {
   width: 20%;
 }
@@ -92,6 +115,7 @@ font-size: 70%;
 
 .tweetDate{
   font-size: x-small;
+
 }
 .categoryTweetList{
   list-style-type: none;
