@@ -29,9 +29,7 @@ only screen and (                min-resolution: 2dppx) {
   padding-left: 0;
 }
 
-.page {
-  background-color:black;
-}
+
 
 .tweetListRow {
       border: 1px solid #d3d3d3;

@@ -52,7 +52,18 @@ legend {
     width: 42%;
 }
 
+a.page-link {
+  color:black;
+}
 
+.page-item.active .page-link {
+  background-color:black;
+  border-color:black;
+}
+
+.page {
+  background-color:black;
+}
 
 /* ==========================================================================
 Browser Upgrade Prompt
