@@ -28,7 +28,7 @@ spring:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:postgresql://localhost:5432/trumptweets
         username: postgres
-        password: CHANGEME
+        password: changeme
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL
@@ -48,7 +48,7 @@ spring:
         host: smtp.gmail.com
         port: 587
         username: zpgutterman@gmail.com
-        password: avett410!
+        password: changeme
         protocol: smtp
         tls: true
         properties.mail.smtp:
@@ -113,4 +113,4 @@ jhipster:
 # ===================================================================
 
 application:
-    pandapay-sk: CHANGEME
+    pandapay-sk: sk_test_-y_8xUMTp7z0PLO2Cl9H4A
